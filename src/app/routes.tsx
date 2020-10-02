@@ -9,16 +9,16 @@ import ChangePasswordForm from '../components/Forms/ChangePasswordForm/LoginForm
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
 
 export const Routes = () => {
-    const authed = false;
+    const token = false;
     return (
         <Switch>
             <Route exact path='/' component={AccountPage} />
             <Route exact path='/posts' component={PostsPage} />
             <Route exact path='/users' component={UsersPage} />
             <Route exact path='/login' component={LoginPage} />
-            <PrivateRoute authed={authed} path='/login/recoveryPassword' component={RecoveryForm} />
-            {/* <Route exact path='/login/recoveryPassword' component={RecoveryForm} /> */}
-            <Route exact path='/login/newPassword' component={ChangePasswordForm} />
+            <Route exact path='/login/recoveryPassword' component={RecoveryForm} />
+            <PrivateRoute authed={token} path='/login/newPassword' component={ChangePasswordForm} />
+            {/* <Route exact path='/login/newPassword' component={ChangePasswordForm} /> */}
         </Switch>
 
     )
