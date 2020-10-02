@@ -1,0 +1,13 @@
+@import 'assets/styles/variables.scss';
+@import 'assets/styles/mixins.scss';
+
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.btn {
+    width: 100%;
+}

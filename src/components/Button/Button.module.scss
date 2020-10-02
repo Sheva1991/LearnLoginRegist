@@ -1,0 +1,21 @@
+@import 'assets/styles/variables.scss';
+@import 'assets/styles/mixins.scss';
+
+.root {
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: $secondary;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+
+    @include hfa {
+        outline: none;
+        border: none;
+        color: #fff;
+        background: darken($color: $secondary, $amount: 10%)
+    }
+}

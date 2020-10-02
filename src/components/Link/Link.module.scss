@@ -1,0 +1,16 @@
+@import 'assets/styles/variables.scss';
+@import 'assets/styles/mixins.scss';
+
+.root {
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    @include hfa {
+        text-decoration: none;
+        outline: none;
+        color: $secondary;
+    }
+}

@@ -1,0 +1,81 @@
+@import 'assets/styles/variables.scss';
+@import 'assets/styles/mixins.scss';
+
+.root {
+    // background-color: rgba(0, 0, 0, 0) !important;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    // border-radius: 0 !important;
+
+    @include hfa {
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19), 0 6px 6px rgba(255, 255, 255, 0.23);
+    }
+}
+
+.img {
+    width: 260px;
+    height: 325px;
+    max-height: 325px;
+    background-color: #191B1C;
+    padding: 55px 22px;
+    position: relative;
+
+    img {
+        position: absolute;
+        max-width: 215px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.sm {
+    width: 260px;
+    height: 360px;
+}
+
+.body {
+    margin-top: 25px;
+    padding: 10px;
+    font-family: $text-playfair;
+}
+
+.title {
+    margin-bottom: 10px;
+    color: $color-main;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-family: $text-playfair;
+    font-weight: 700;
+}
+
+.text {
+    font-size: 1.6rem;
+    color: #D0D0D0;
+}
+
+@media screen and (max-width: 1400px) {
+
+    .sm {
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .sm {
+        width: 260px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .sm {
+        width: 260px;
+    }
+}
