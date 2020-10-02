@@ -16,8 +16,8 @@ export const Routes = () => {
             <Route exact path='/posts' component={PostsPage} />
             <Route exact path='/users' component={UsersPage} />
             <Route exact path='/login' component={LoginPage} />
-            {/* <PrivateRoute authed={authed} path='/login/recoveryPassword' component={RecoveryForm} /> */}
-            <Route exact path='/login/recoveryPassword' component={RecoveryForm} />
+            <PrivateRoute authed={authed} path='/login/recoveryPassword' component={RecoveryForm} />
+            {/* <Route exact path='/login/recoveryPassword' component={RecoveryForm} /> */}
             <Route exact path='/login/newPassword' component={ChangePasswordForm} />
         </Switch>
 

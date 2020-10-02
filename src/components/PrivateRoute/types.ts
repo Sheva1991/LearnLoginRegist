@@ -1,4 +1,5 @@
 export interface PropsType {
     component: React.ElementType,
-    authed: boolean
+    authed: boolean,
+    path: string
 }
