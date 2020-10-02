@@ -95,7 +95,7 @@ const RegistrationForm: React.FC = memo(() => {
                         </div>
                         <div className={styles.field}>
                             <label>
-                                <div className={styles.label}>Password</div>
+                                <div className={styles.label}>Confirm Password</div>
                             </label>
                             <Field
                                 name='passwordConfirm'
