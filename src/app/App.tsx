@@ -6,6 +6,7 @@ import { theme, useStyles } from './styles';
 
 const App = () => {
   const classes = useStyles();
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme} >

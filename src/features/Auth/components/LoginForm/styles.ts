@@ -12,6 +12,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         field: {
             marginBottom: '15px',
             width: '100%',
-        }
+        },
     }),
 );

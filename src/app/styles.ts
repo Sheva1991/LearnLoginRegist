@@ -10,14 +10,20 @@ export const theme = createMuiTheme({
                     fontSize: '16px'
                 },
             },
-        },
-    },
+        }
+    }
 });
 
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             minHeight: '100vh',
-        }
+            "& .MuiFormLabel-root": {
+                color: '#fff'
+            },
+            "& .Mui-error": {
+                color: 'red'
+            }
+        },
     }),
 );

@@ -68,11 +68,13 @@ const AddPostForm: React.FC = memo(() => {
                     <Box margin={1}>
                         <Field
                             className={classes.field}
-                            component={TextField}
                             name="body"
                             type="textarea"
-                            cols="45"
+                            component={TextField}
+                            multiline
+                            rowsMax={4}
                             label="Содержание"
+                            variant="outlined"
                         />
                     </Box>
                     <Box margin={1}>
