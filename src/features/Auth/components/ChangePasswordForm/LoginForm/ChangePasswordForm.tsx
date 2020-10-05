@@ -1,14 +1,15 @@
 import React, { memo, useEffect, useMemo } from 'react'
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from "yup";
 import { FormValues, PropsType } from './types';
-import { Button, Input } from '@material-ui/core';
+import { Box, Button, TextField } from '@material-ui/core';
+import { useStyles } from './styles';
 
 
 
 
 const ChangePasswordForm: React.FC<PropsType> = memo(({ password }) => {
-
+    const classes = useStyles();
     const action = (values: FormValues) => {
         console.log('change Password')
     }
@@ -53,35 +54,29 @@ const ChangePasswordForm: React.FC<PropsType> = memo(({ password }) => {
             onSubmit={submit}
         >
             {({ isSubmitting, isValid }) => (
-                <div>
-                    <Form>
-                        <div>
-                            <label>
-                                <div>Password</div>
-                            </label>
-                            <Field
-                                name='password'
-                                component={Input}
-                                type='password'
-                            />
-                            {/* <ErrorMessage name='password' component={ErrorField} /> */}
-                        </div>
-                        <div >
-                            <label>
-                                <div>Confirm password</div>
-                            </label>
-                            <Field
-                                name='passwordConfirm'
-                                component={Input}
-                                type='password'
-                                disabled
-                            />
-                        </div>
-
-                        <Button type='submit' title='Change password' disabled={isSubmitting || !isValid} />
-                    </Form>
-
-                </div>
+                <Form className={classes.root}>
+                    <Box margin={1}>
+                        <Field
+                            className={classes.field}
+                            component={TextField}
+                            name="password"
+                            type="password"
+                            label="Password"
+                        />
+                    </Box>
+                    <Box margin={1}>
+                        <Field
+                            className={classes.field}
+                            component={TextField}
+                            name="passwordConfirm"
+                            type="password"
+                            label="Confirm Password"
+                        />
+                    </Box>
+                    <Button type='submit' variant="contained" color="primary" disabled={isSubmitting || !isValid}>
+                        Change Password
+                    </Button>
+                </Form>
             )}
         </Formik>
     </div>

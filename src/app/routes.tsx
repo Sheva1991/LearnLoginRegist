@@ -5,7 +5,7 @@ import Account from 'features/Account/Account';
 import { ROUTES } from '../constants/routes';
 
 export const Routes = () => {
-    const authed = false
+    const authed = true
     return (
         <>
             <Route path={ROUTES.default} component={() => (authed ? <Redirect to={ROUTES.account.main} /> : <Redirect to={ROUTES.auth.main} />)} />

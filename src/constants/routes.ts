@@ -8,6 +8,7 @@ export const ROUTES = {
     account: {
         main: '/account',
         posts: '/account/posts',
+        post: '/account/posts/:id?',
         users: '/account/users',
     }
 }

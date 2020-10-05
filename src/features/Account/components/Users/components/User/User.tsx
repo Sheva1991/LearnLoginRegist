@@ -1,11 +1,14 @@
 import React from 'react'
 import { UserProps } from './types';
-import { Card, CardActions, CardContent, CardMedia, Link, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
+import { useStyles } from './styles';
 
 
 
 const User: React.FC<UserProps> = ({ user }) => {
+    const classes = useStyles()
     return (
         <Card>
             <CardMedia
@@ -25,8 +28,10 @@ const User: React.FC<UserProps> = ({ user }) => {
                     Email: {user.email}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Link component={NavLink} to='/posts' title='Posts' />
+            <CardActions className={classes.btn}>
+                <Link component={NavLink} to={ROUTES.account.posts}>
+                    <Button color='primary' variant="contained">Posts</Button>
+                </Link>
             </CardActions>
         </Card>
     )

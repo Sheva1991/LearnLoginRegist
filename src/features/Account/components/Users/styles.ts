@@ -6,12 +6,10 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            textAlign: 'center',
-            width: '100%',
+            alignItems: 'center',
         },
-        field: {
-            marginBottom: '15px',
-            width: '100%',
+        pagination: {
+            marginBottom: '50px'
         }
     }),
 );

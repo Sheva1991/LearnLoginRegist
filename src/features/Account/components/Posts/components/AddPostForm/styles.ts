@@ -11,8 +11,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         field: {
             marginBottom: '15px',
-            fontSize: '2rem',
-            color: '#fff',
             width: '100%',
         }
     }),

@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useMemo } from 'react'
 import { Field, Form, Formik } from 'formik';
 import * as Yup from "yup";
-import { Box, Button, TextareaAutosize } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { Post } from 'features/Account/components/Posts/types';
 import { TextField } from 'formik-material-ui';
 import { useStyles } from './styles';
@@ -48,8 +48,8 @@ const AddPostForm: React.FC = memo(() => {
                 id: 5, title: '', body: ''
             }}
             validationSchema={Yup.object().shape({
-                email: Yup.string().email("Email not valid").required("Email is required"),
-                password: Yup.string().min(3).max(20).required("Password is required"),
+                title: Yup.string().min(3).max(20).required("Title is required"),
+                body: Yup.string().min(20).max(400).required("Body is required"),
             })}
             onSubmit={submit}
         >
@@ -68,9 +68,9 @@ const AddPostForm: React.FC = memo(() => {
                     <Box margin={1}>
                         <Field
                             className={classes.field}
-                            component={TextareaAutosize}
+                            component={TextField}
                             name="body"
-                            type="text"
+                            type="textarea"
                             cols="45"
                             label="Содержание"
                         />
