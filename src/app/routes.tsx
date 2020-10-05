@@ -1,25 +1,17 @@
-import AccountPage from 'features/AccountPage'
-import LoginPage from 'features/LoginPage'
-import PostsPage from 'features/PostsPage'
-import UsersPage from 'features/UsersPage'
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import RecoveryForm from '../components/Forms/RecoveryForm/RecoveryForm';
-import ChangePasswordForm from '../components/Forms/ChangePasswordForm/LoginForm/ChangePasswordForm';
-import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
+import { Redirect, Route } from 'react-router-dom'
+import Auth from 'features/Auth'
+import Account from 'features/Account/Account';
+import { ROUTES } from '../constants/routes';
 
 export const Routes = () => {
-    const token = false;
+    const authed = false
     return (
-        <Switch>
-            <Route exact path='/' component={AccountPage} />
-            <Route exact path='/posts' component={PostsPage} />
-            <Route exact path='/users' component={UsersPage} />
-            <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/login/recoveryPassword' component={RecoveryForm} />
-            <PrivateRoute authed={token} path='/login/newPassword' component={ChangePasswordForm} />
-            {/* <Route exact path='/login/newPassword' component={ChangePasswordForm} /> */}
-        </Switch>
+        <>
+            <Route path={ROUTES.default} component={() => (authed ? <Redirect to={ROUTES.account.main} /> : <Redirect to={ROUTES.auth.main} />)} />
+            <Route path={ROUTES.auth.main} component={Auth} />
+            <Route path={ROUTES.account.main} component={Account} />
+        </>
 
     )
 }
