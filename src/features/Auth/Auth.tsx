@@ -7,16 +7,16 @@ import { useSelector } from 'react-redux';
 
 
 const Auth = () => {
-    const loading = useSelector((state: RootState) => state.auth.loading)
+
     const classes = useStyles();
 
     return (
         <Container className={classes.root}>
-            { loading ? <CircularProgress /> :
-                <Paper elevation={3} className={classes.paper}>
-                    {<Routes />}
-                </Paper>
-            }
+
+            <Paper elevation={3} className={classes.paper}>
+                {<Routes />}
+            </Paper>
+
         </Container>
     )
 }
