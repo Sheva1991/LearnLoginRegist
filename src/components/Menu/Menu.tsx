@@ -10,6 +10,8 @@ import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/Auth/actions';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MenuListComposition() {
+    const dispatch = useDispatch()
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -38,6 +41,11 @@ export default function MenuListComposition() {
 
         setOpen(false);
     };
+
+    const handleLogout = (e: React.MouseEvent<EventTarget>) => {
+        dispatch(logout())
+        handleClose(e)
+    }
 
     function handleListKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Tab') {
@@ -76,7 +84,7 @@ export default function MenuListComposition() {
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                         <MenuItem onClick={handleClose} component={NavLink} to={ROUTES.account.users}>Users</MenuItem>
                                         <MenuItem onClick={handleClose} component={NavLink} to={ROUTES.account.posts}>Posts</MenuItem>
-                                        <MenuItem onClick={handleClose} component={NavLink} to={ROUTES.auth.main}>Logout</MenuItem>
+                                        <MenuItem onClick={handleLogout} component={NavLink} to={ROUTES.auth.main}>Logout</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>

@@ -3,19 +3,20 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from "yup";
 import { FormValues } from './types';
 import { Box, Button, Link } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { TextField } from 'formik-material-ui';
+import { useDispatch } from 'react-redux'
 import { useStyles } from './styles';
+import { login } from '../../actions';
 
 
 
 
 const LoginForm: React.FC = memo(() => {
+    const dispatch = useDispatch()
+    const history = useHistory()
     const classes = useStyles();
-    const action = (values: FormValues) => {
-        console.log('login')
-    }
 
     const mountState = useMemo(
         () => ({
@@ -26,7 +27,11 @@ const LoginForm: React.FC = memo(() => {
 
     const submit = async (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await action(values)
+            await dispatch(login(values, () => {
+                history.push({
+                    pathname: ROUTES.account.main,
+                })
+            }))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)

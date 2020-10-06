@@ -8,7 +8,7 @@ const Auth = () => {
     return (
         <Container className={classes.root}>
             <Paper elevation={3} className={classes.paper}>
-                <Routes />
+                {<Routes />}
             </Paper>
         </Container>
     )

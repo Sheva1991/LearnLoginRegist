@@ -5,15 +5,18 @@ import { FormValues } from './types';
 import { Box, Button } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { useStyles } from './styles';
+import { registrate } from 'features/Auth/actions';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { ROUTES } from '../../../../constants/routes';
 
 
 
 
 const RegistrationForm: React.FC = memo(() => {
-    const classes = useStyles();
-    const action = (values: FormValues) => {
-        console.log('registration')
-    }
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const classes = useStyles()
 
     const mountState = useMemo(
         () => ({
@@ -24,7 +27,11 @@ const RegistrationForm: React.FC = memo(() => {
 
     const submit = async (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await action(values)
+            await dispatch(registrate(values, () => {
+                history.push({
+                    pathname: ROUTES.auth.main,
+                })
+            }))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -45,28 +52,18 @@ const RegistrationForm: React.FC = memo(() => {
     return <>
         <Formik
             initialValues={{
-                name: '', email: '', password: '', passwordConfirm: ''
+                email: '', password: '', password_confirmation: ''
             }}
             validationSchema={Yup.object().shape({
-                name: Yup.string().min(1).required("Name is required"),
                 email: Yup.string().email("Email not valid").required("Email is required"),
-                password: Yup.string().min(3).max(20).required("Password is required"),
-                passwordConfirm: Yup.string()
+                password: Yup.string().min(6).max(20).required("Password is required"),
+                password_confirmation: Yup.string()
                     .oneOf([Yup.ref('password')], 'Confirm password').required('Password confirm is required')
             })}
             onSubmit={submit}
         >
             {({ isSubmitting, isValid }) => (
                 <Form className={classes.root}>
-                    <Box margin={1}>
-                        <Field
-                            className={classes.field}
-                            component={TextField}
-                            name="name"
-                            type="text"
-                            label="Name"
-                        />
-                    </Box>
                     <Box margin={1}>
                         <Field
                             className={classes.field}
@@ -89,7 +86,7 @@ const RegistrationForm: React.FC = memo(() => {
                         <Field
                             className={classes.field}
                             component={TextField}
-                            name="passwordConfirm"
+                            name="password_confirmation"
                             type="password"
                             label="Confirm Password"
                         />
