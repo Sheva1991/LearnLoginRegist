@@ -6,9 +6,9 @@ import { Box, Button, Link } from '@material-ui/core';
 import { NavLink, useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { TextField } from 'formik-material-ui';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { useStyles } from './styles';
-import { login } from '../../actions';
+import { login, authorize } from '../../actions';
 
 
 
@@ -39,6 +39,17 @@ const LoginForm: React.FC = memo(() => {
         }
     }
 
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            dispatch(authorize(token, () => {
+                history.push({
+                    pathname: ROUTES.account.main,
+                })
+            }))
+        }
+    }, [])
+
     useEffect(
         () => {
             mountState.mounted = true;
@@ -50,6 +61,7 @@ const LoginForm: React.FC = memo(() => {
     )
 
     return <>
+
         <Formik
             initialValues={{
                 email: '', password: ''

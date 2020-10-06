@@ -1,4 +1,7 @@
 import {
+    AUTHORIZE_REQUEST,
+    AUTHORIZE_ERROR,
+    AUTHORIZE_RESPONSE,
     LOGIN_ERROR,
     LOGIN_REQUEST,
     LOGIN_RESPONSE,
@@ -24,6 +27,32 @@ const initialState = {
 
 const authReducer = (state: AuthState = initialState, action: AuthActions): AuthState => {
     switch (action.type) {
+        case AUTHORIZE_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case AUTHORIZE_ERROR: {
+            return { ...state, loading: false }
+        }
+
+        case AUTHORIZE_RESPONSE: {
+            const token = localStorage.getItem('token')
+            const {
+                id,
+                email,
+                verified
+            } = action.payload
+            return {
+                ...state,
+                user: {
+                    id: id,
+                    email: email,
+                    verified: verified
+                },
+                token: token,
+                loading: false
+            }
+        }
         case LOGIN_REQUEST: {
             return { ...state, loading: true }
         }
@@ -37,8 +66,6 @@ const authReducer = (state: AuthState = initialState, action: AuthActions): Auth
                 user,
                 token
             } = action.payload
-            console.log(user)
-            console.log(token)
             return {
                 ...state,
                 user: user,

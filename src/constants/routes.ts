@@ -4,6 +4,7 @@ export const ROUTES = {
         main: '/auth',
         recoverPassword: '/auth/recoverPassword',
         registration: '/auth/registration',
+        verify: '/auth/email-verify/{hash}'
     },
     account: {
         main: '/account',

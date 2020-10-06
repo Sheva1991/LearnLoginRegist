@@ -6,6 +6,7 @@ import { theme, useStyles } from './styles';
 import { Provider } from 'react-redux';
 import store from './store';
 
+
 const App = () => {
   const classes = useStyles();
 

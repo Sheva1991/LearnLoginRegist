@@ -28,3 +28,9 @@ export interface ResponseLogin {
 export interface ResponseRegistrate {
     data: any
 }
+
+export interface ResponseAuthorize {
+    id: number,
+    email: string,
+    verified: boolean
+}
