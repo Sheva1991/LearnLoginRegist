@@ -12,20 +12,17 @@ import {
 } from './constants'
 import { AuthState } from "./types";
 import { AuthActions } from "./actions";
+import { STORAGE } from '../../utils/storage';
 
 
 const initialState = {
-    user: {
-        id: null,
-        email: '',
-        verified: false
-    },
-    token: null,
+    user: null,
+    token: STORAGE.getItem('token') ? STORAGE.getItem('token') : null,
     loading: false,
     error: null
 } as AuthState;
 
-const authReducer = (state: AuthState = initialState, action: AuthActions): AuthState => {
+const auth = (state: AuthState = initialState, action: AuthActions): AuthState => {
     switch (action.type) {
         case AUTHORIZE_REQUEST: {
             return { ...state, loading: true }
@@ -90,12 +87,6 @@ const authReducer = (state: AuthState = initialState, action: AuthActions): Auth
         case LOGOUT_REQUEST: {
             return {
                 ...state,
-                user: {
-                    id: null,
-                    email: '',
-                    verified: false
-                },
-                token: null,
             }
         }
         default:
@@ -104,5 +95,5 @@ const authReducer = (state: AuthState = initialState, action: AuthActions): Auth
 }
 
 
-export default authReducer;
+export default auth;
 

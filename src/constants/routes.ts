@@ -2,9 +2,10 @@ export const ROUTES = {
     default: '/',
     auth: {
         main: '/auth',
+        login: '/auth/login',
         recoverPassword: '/auth/recoverPassword',
         registration: '/auth/registration',
-        verify: '/auth/email-verify/{hash}'
+        verify: '/auth/email-verify'
     },
     account: {
         main: '/account',

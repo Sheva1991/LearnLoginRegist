@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './routes';
 import { ThemeProvider, CssBaseline, Box } from '@material-ui/core';
-import { theme, useStyles } from './styles';
+import { useStyles } from './styles';
 import { Provider } from 'react-redux';
 import store from './store';
+import { theme } from '../theme/theme';
 
 
 const App = () => {

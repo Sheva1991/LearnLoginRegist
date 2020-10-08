@@ -1,20 +1,19 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
 import Header from 'components/Header';
-import { Routes } from './routes';
 import { useStyles } from './styles';
 
-const Account = () => {
+const Account: React.FC = ({ children }) => {
     const classes = useStyles()
     return (
         <>
+
             <Header />
-            <Container className={classes.root}>
-                <Routes />
-            </Container>
+            < Container className={classes.root} >
+                <> {children}</>
+            </Container >
+
         </>
-
-
     )
 }
 

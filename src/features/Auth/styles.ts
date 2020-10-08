@@ -14,9 +14,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: 'rgb(25,118,210)',
-            padding: '100px',
+            padding: theme.spacing(12),
             color: '#fff',
             width: '50%',
         }
-    }),
+    }), { name: 'Auth' }
 );

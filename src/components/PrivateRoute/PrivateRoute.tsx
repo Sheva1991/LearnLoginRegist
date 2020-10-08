@@ -5,14 +5,16 @@ import { ROUTES } from '../../constants/routes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
-const PrivateRoute: React.FC<PropsType> = ({ component: Component, ...rest }) => {
-    const token = useSelector((state: RootState) => state.auth.token)
+const PrivateRoute: React.FC<PropsType> = ({ component: Component, path, ...rest }) => {
+    const user = useSelector((state: RootState) => state.auth.user)
     return (
         <Route
+            exact
+            path={path}
             {...rest}
-            render={(props) => token !== null
+            render={(props) => (user !== null && user.verified !== null)
                 ? <Component {...props} />
-                : <Redirect to={{ pathname: ROUTES.auth.main }} />}
+                : <Redirect to={{ pathname: ROUTES.auth.verify }} />}
         />
     )
 }

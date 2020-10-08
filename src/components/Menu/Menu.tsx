@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,23 +11,15 @@ import { NavLink } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/Auth/actions';
+import { useStyles } from './styles';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'flex',
-        },
-        paper: {
-            marginRight: theme.spacing(2),
-        },
-    }),
-);
 
-export default function MenuListComposition() {
+
+const MenuListComposition = () => {
     const dispatch = useDispatch()
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef<HTMLButtonElement>(null);
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
@@ -38,7 +29,6 @@ export default function MenuListComposition() {
         if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
             return;
         }
-
         setOpen(false);
     };
 
@@ -55,8 +45,8 @@ export default function MenuListComposition() {
     }
 
     // return focus to the button when we transitioned from !open -> open
-    const prevOpen = React.useRef(open);
-    React.useEffect(() => {
+    const prevOpen = useRef(open);
+    useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current!.focus();
         }
@@ -84,7 +74,7 @@ export default function MenuListComposition() {
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                         <MenuItem onClick={handleClose} component={NavLink} to={ROUTES.account.users}>Users</MenuItem>
                                         <MenuItem onClick={handleClose} component={NavLink} to={ROUTES.account.posts}>Posts</MenuItem>
-                                        <MenuItem onClick={handleLogout} component={NavLink} to={ROUTES.auth.main}>Logout</MenuItem>
+                                        <MenuItem onClick={handleLogout} component={NavLink} to={ROUTES.auth.login}>Logout</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
@@ -95,3 +85,5 @@ export default function MenuListComposition() {
         </div>
     );
 }
+
+export default MenuListComposition

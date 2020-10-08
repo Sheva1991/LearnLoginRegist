@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const instance = axios.create({
+const API = axios.create({
     baseURL: 'https://lrvl-demo.herokuapp.com/api'
 });
 
-export default instance
+export default API
 
 
 

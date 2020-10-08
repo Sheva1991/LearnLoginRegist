@@ -43,7 +43,7 @@ const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <Paper style={modalStyle} className={classes.paper}>{children}</Paper>
+                <Paper style={modalStyle} elevation={3} className={classes.paper}>{children}</Paper>
             </Modal>
         </>
     );
