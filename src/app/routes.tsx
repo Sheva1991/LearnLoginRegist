@@ -12,7 +12,7 @@ import Users from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthorizeRoute from '../components/AuthorizeRoute/AuthorizeRoute';
-// import LoginRoute from 'components/LoginRoute/LoginRoute';
+import LoginRoute from 'components/LoginRoute/LoginRoute';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 
@@ -38,15 +38,9 @@ export const Routes = () => {
                 <Route path={ROUTES.auth.main}>
                     <Auth>
                         <Switch>
-                            <Route path={ROUTES.auth.login}>
-                                {(token !== null && user !== null) ? <Redirect to={{ pathname: ROUTES.account.main }} />
-                                    : <Login />}
-                            </Route>
+                            <LoginRoute path={ROUTES.auth.login} component={Login} />
                             <Route exact path={ROUTES.auth.recoverPassword} component={Recovery} />
-                            <Route path={ROUTES.auth.registration}>
-                                {(token !== null && user !== null) ? <Redirect to={{ pathname: ROUTES.account.main }} />
-                                    : <Registration />}
-                            </Route>
+                            <LoginRoute path={ROUTES.auth.registration} component={Registration} />
                             <Route exact path={ROUTES.auth.verify} component={Verify} />
                         </Switch>
                     </Auth>

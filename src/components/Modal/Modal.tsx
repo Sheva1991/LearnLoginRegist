@@ -6,22 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import { PropsType } from './types';
 
 
-function getModalStyle() {
-    const top = 50;
-    const left = 50;
-
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
-
-
-
 const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
     const classes = useStyles();
-    const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
 
     const handleOpen = useCallback(() => {
@@ -45,7 +31,7 @@ const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <Paper style={modalStyle} elevation={3} className={classes.paper}>{children}</Paper>
+                <Paper elevation={3} className={classes.paper}>{children}</Paper>
             </Modal>
         </>
     );
