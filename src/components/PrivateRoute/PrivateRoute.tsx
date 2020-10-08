@@ -12,7 +12,7 @@ const PrivateRoute: React.FC<PropsType> = ({ component: Component, path, ...rest
             exact
             path={path}
             {...rest}
-            render={(props) => (user !== null && true)
+            render={(props) => (user !== null && user.verified)
                 ? <Component {...props} />
                 : <Redirect to={{ pathname: ROUTES.auth.verify }} />}
         />
