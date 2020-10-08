@@ -8,9 +8,9 @@ export const ROUTES = {
         verify: '/auth/email-verify'
     },
     account: {
-        main: '/account',
-        posts: '/account/posts',
-        post: '/account/posts/:id?',
-        users: '/account/users',
+        main: '/',
+        posts: '/posts',
+        post: '/posts/:id?',
+        users: '/users',
     }
 }
