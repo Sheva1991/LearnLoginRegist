@@ -7,12 +7,12 @@ import PrivateRoute from 'components/PrivateRoute';
 import Login from 'features/Auth/Login';
 import Recovery from 'features/Auth/Recovery';
 import Registration from 'features/Auth/Registration';
-import VerifyAlert from 'features/Auth/VerifyAlert';
+import Verify from 'features/Auth/Verify';
 import Users from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthorizeRoute from '../components/AuthorizeRoute/AuthorizeRoute';
-import LoginRoute from 'components/LoginRoute/LoginRoute';
+// import LoginRoute from 'components/LoginRoute/LoginRoute';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 
@@ -20,7 +20,6 @@ export const Routes = () => {
     const { token, user } = useSelector((state: RootState) => state.auth)
     return (
         <>
-
             <Switch>
                 <Route exact path={ROUTES.default}>
                     <AuthorizeRoute path={ROUTES.default} />
@@ -48,12 +47,11 @@ export const Routes = () => {
                                 {(token !== null && user !== null) ? <Redirect to={{ pathname: ROUTES.account.main }} />
                                     : <Registration />}
                             </Route>
-                            <Route exact path={ROUTES.auth.verify} component={VerifyAlert} />
+                            <Route exact path={ROUTES.auth.verify} component={Verify} />
                         </Switch>
                     </Auth>
                 </Route>
             </Switch>
-
         </>
     )
 }

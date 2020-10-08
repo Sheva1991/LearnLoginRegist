@@ -11,6 +11,9 @@ import {
     LOGOUT_REQUEST,
     LOGOUT_ERROR,
     LOGOUT_RESPONSE,
+    VERIFY_REQUEST,
+    VERIFY_ERROR,
+    VERIFY_RESPONSE,
 } from './constants'
 import { AuthState } from "./types";
 import { AuthActions } from "./actions";
@@ -28,10 +31,6 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
     switch (action.type) {
         case AUTHORIZE_REQUEST: {
             return { ...state, loading: true }
-        }
-
-        case AUTHORIZE_ERROR: {
-            return { ...state, loading: false }
         }
 
         case AUTHORIZE_RESPONSE: {
@@ -52,12 +51,14 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
                 loading: false
             }
         }
-        case LOGIN_REQUEST: {
-            return { ...state, loading: true }
+
+        case AUTHORIZE_ERROR: {
+            return { ...state, loading: false }
         }
 
-        case LOGIN_ERROR: {
-            return { ...state, loading: false }
+
+        case LOGIN_REQUEST: {
+            return { ...state, loading: true }
         }
 
         case LOGIN_RESPONSE: {
@@ -72,25 +73,36 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
                 loading: false
             }
         }
+
+        case LOGIN_ERROR: {
+            return { ...state, loading: false }
+        }
+
+
         case REGISTRATE_REQUEST: {
             return { ...state, loading: true }
+        }
+
+        case REGISTRATE_RESPONSE: {
+            const {
+                user,
+                token
+            } = action.payload
+            return {
+                ...state,
+                user: user,
+                token: token,
+                loading: false
+            }
         }
 
         case REGISTRATE_ERROR: {
             return { ...state, loading: false }
         }
 
-        case REGISTRATE_RESPONSE: {
-            return {
-                ...state,
-                loading: false
-            }
-        }
+
         case LOGOUT_REQUEST: {
             return { ...state, loading: true }
-        }
-        case LOGOUT_ERROR: {
-            return { ...state, loading: false }
         }
 
         case LOGOUT_RESPONSE: {
@@ -111,6 +123,34 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
                 }
             }
         }
+        case LOGOUT_ERROR: {
+            return { ...state, loading: false }
+        }
+        case VERIFY_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case VERIFY_RESPONSE: {
+            const {
+                id,
+                email,
+                verified
+            } = action.payload
+            return {
+                ...state,
+                user: {
+                    id: id,
+                    email: email,
+                    verified: verified
+                },
+                loading: false
+            }
+        }
+        case VERIFY_ERROR: {
+            return { ...state, loading: false }
+        }
+
+
         default:
             return state;
     }

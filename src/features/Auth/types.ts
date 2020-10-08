@@ -25,9 +25,6 @@ export interface ResponseLogin {
     user: UserType,
     token: string
 }
-export interface ResponseRegistrate {
-    data: any
-}
 
 export interface ResponseAuthorize {
     id: number,
@@ -38,3 +35,9 @@ export interface ResponseAuthorize {
 export interface ResponseLogout {
     success: boolean
 }
+export interface ResponseVerify {
+    id: number,
+    email: string,
+    verified: boolean
+}
+

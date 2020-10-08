@@ -38,7 +38,7 @@ const MenuListComposition = () => {
     const handleLogout = useCallback((e: React.MouseEvent<EventTarget>) => {
         dispatch(logout())
         handleClose(e)
-    }, []
+    }, [dispatch, handleClose]
     )
 
     const handleListKeyDown = useCallback((event: React.KeyboardEvent) => {

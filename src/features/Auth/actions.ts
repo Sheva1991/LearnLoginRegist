@@ -4,7 +4,6 @@ import {
     LOGOUT_REQUEST,
     LOGOUT_ERROR,
     LOGOUT_RESPONSE,
-    VERIFY_REQUEST,
     AUTHORIZE_REQUEST,
     AUTHORIZE_ERROR,
     AUTHORIZE_RESPONSE
@@ -15,6 +14,7 @@ import API from 'api/api';
 import { ResponseAuthorize, ResponseLogout } from './types';
 import { loginRequest, loginError, loginResponse } from './Login/actions';
 import { registrateRequest, registrateError, registrateResponse } from './Registration/actions';
+import { verifyRequest, verifyError, verifyResponse } from './Verify/actions';
 
 export const authorizeRequest = createAction<typeof AUTHORIZE_REQUEST>(AUTHORIZE_REQUEST);
 export const authorizeError = createAction<typeof AUTHORIZE_ERROR>(AUTHORIZE_ERROR);
@@ -22,7 +22,6 @@ export const authorizeResponse = createActionWithPayload<typeof AUTHORIZE_RESPON
 export const logoutRequest = createAction<typeof LOGOUT_REQUEST>(LOGOUT_REQUEST);
 export const logoutError = createAction<typeof LOGOUT_ERROR>(LOGOUT_ERROR);
 export const logoutResponse = createActionWithPayload<typeof LOGOUT_RESPONSE, ResponseLogout>(LOGOUT_RESPONSE);
-export const verifyRequest = createAction<typeof VERIFY_REQUEST>(VERIFY_REQUEST);
 
 
 export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
@@ -35,9 +34,6 @@ export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> 
     }
 }
 
-export const verifyAccount = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
-
-}
 export const logout = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(logoutRequest())
     try {
@@ -62,3 +58,5 @@ export type AuthActions =
     | ReturnType<typeof logoutError>
     | ReturnType<typeof logoutResponse>
     | ReturnType<typeof verifyRequest>
+    | ReturnType<typeof verifyError>
+    | ReturnType<typeof verifyResponse>

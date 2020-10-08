@@ -17,7 +17,7 @@ const AuthorizeRoute: React.FC<PropsType> = ({ path, ...rest }) => {
         if (token !== null) {
             dispatch(authorize())
         }
-    }, [])
+    }, [dispatch, token])
 
     return (
         <>
