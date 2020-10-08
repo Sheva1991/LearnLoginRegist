@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -21,28 +21,33 @@ const MenuListComposition = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
 
-    const handleToggle = () => {
+    const handleToggle = useCallback(() => {
         setOpen((prevOpen) => !prevOpen);
-    };
+    }, []
+    )
 
-    const handleClose = (event: React.MouseEvent<EventTarget>) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-            return;
-        }
-        setOpen(false);
-    };
+    const handleClose = useCallback(
+        (event: React.MouseEvent<EventTarget>) => {
+            if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+                return;
+            }
+            setOpen(false);
+        }, []
+    )
 
-    const handleLogout = (e: React.MouseEvent<EventTarget>) => {
+    const handleLogout = useCallback((e: React.MouseEvent<EventTarget>) => {
         dispatch(logout())
         handleClose(e)
-    }
+    }, []
+    )
 
-    function handleListKeyDown(event: React.KeyboardEvent) {
+    const handleListKeyDown = useCallback((event: React.KeyboardEvent) => {
         if (event.key === 'Tab') {
             event.preventDefault();
             setOpen(false);
         }
-    }
+    }, []
+    )
 
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = useRef(open);
@@ -50,7 +55,6 @@ const MenuListComposition = () => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current!.focus();
         }
-
         prevOpen.current = open;
     }, [open]);
 

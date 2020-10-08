@@ -34,3 +34,7 @@ export interface ResponseAuthorize {
     email: string,
     verified: boolean
 }
+
+export interface ResponseLogout {
+    success: boolean
+}

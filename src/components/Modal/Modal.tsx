@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import { useStyles } from './styles';
@@ -24,13 +24,15 @@ const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => {
+    const handleOpen = useCallback(() => {
         setOpen(true);
-    };
+    }, []
+    )
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setOpen(false);
-    };
+    }, []
+    )
 
     return (
         <>

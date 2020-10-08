@@ -6,13 +6,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
 const LoginRoute: React.FC<PropsType> = ({ component: Component, path, ...rest }) => {
-    const token = useSelector((state: RootState) => state.auth.token)
+    const { token, user } = useSelector((state: RootState) => state.auth)
     return (
         <Route
             exact
             path={path}
             {...rest}
-            render={(props) => token !== null
+            render={(props) => (token !== null && user !== null)
                 ? <Redirect to={{ pathname: ROUTES.account.main }} />
                 : <Component {...props} />}
         />

@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: 'rgb(25,118,210)',
             padding: theme.spacing(12),
             color: '#fff',
-            width: '50%',
         }
     }), { name: 'Auth' }
 );

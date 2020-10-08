@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Auth from 'features/Auth'
 import Account from 'features/Account';
 import { ROUTES } from '../constants/routes';
@@ -13,27 +13,41 @@ import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthorizeRoute from '../components/AuthorizeRoute/AuthorizeRoute';
 import LoginRoute from 'components/LoginRoute/LoginRoute';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
 
 export const Routes = () => {
+    const { token, user } = useSelector((state: RootState) => state.auth)
     return (
         <>
-            <AuthorizeRoute path={ROUTES.default} />
+
             <Switch>
+                <Route exact path={ROUTES.default}>
+                    <AuthorizeRoute path={ROUTES.default} />
+                </Route>
                 <Route path={ROUTES.account.main}>
-                    <Account>
-                        <Switch>
-                            <PrivateRoute path={ROUTES.account.users} component={Users} />
-                            <PrivateRoute path={ROUTES.account.posts} component={Posts} />
-                            <PrivateRoute path={ROUTES.account.post} component={PostInfo} />
-                        </Switch>
-                    </Account>
+                    {(token !== null && user !== null) ?
+                        <Account>
+                            <Switch>
+                                <PrivateRoute path={ROUTES.account.users} component={Users} />
+                                <PrivateRoute path={ROUTES.account.posts} component={Posts} />
+                                <PrivateRoute path={ROUTES.account.post} component={PostInfo} />
+                            </Switch>
+                        </Account>
+                        : <Redirect to={{ pathname: ROUTES.auth.login }} />}
                 </Route>
                 <Route path={ROUTES.auth.main}>
                     <Auth>
                         <Switch>
-                            <LoginRoute path={ROUTES.auth.login} component={Login} />
+                            <Route path={ROUTES.auth.login}>
+                                {(token !== null && user !== null) ? <Redirect to={{ pathname: ROUTES.account.main }} />
+                                    : <Login />}
+                            </Route>
                             <Route exact path={ROUTES.auth.recoverPassword} component={Recovery} />
-                            <LoginRoute path={ROUTES.auth.registration} component={Registration} />
+                            <Route path={ROUTES.auth.registration}>
+                                {(token !== null && user !== null) ? <Redirect to={{ pathname: ROUTES.account.main }} />
+                                    : <Registration />}
+                            </Route>
                             <Route exact path={ROUTES.auth.verify} component={VerifyAlert} />
                         </Switch>
                     </Auth>

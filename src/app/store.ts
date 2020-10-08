@@ -25,6 +25,8 @@ store.subscribe(() => {
     const token = state.auth.token
     if (token !== null) {
         STORAGE.setItem('token', token)
+    } else {
+        STORAGE.clear()
     }
     API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 })

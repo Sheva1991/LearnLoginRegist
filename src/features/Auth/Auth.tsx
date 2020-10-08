@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Paper } from '@material-ui/core';
+import { Box, Container, Paper } from '@material-ui/core';
 import { useStyles } from './styles';
 
 
@@ -8,9 +8,11 @@ const Auth: React.FC = ({ children }) => {
 
     return (
         <Container className={classes.root}>
-            <Paper elevation={3} className={classes.paper}>
-                {children}
-            </Paper>
+            <Box width='50%'>
+                <Paper elevation={3} className={classes.paper}>
+                    {children}
+                </Paper>
+            </Box>
         </Container>
     )
 }

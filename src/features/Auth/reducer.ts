@@ -8,7 +8,9 @@ import {
     REGISTRATE_ERROR,
     REGISTRATE_REQUEST,
     REGISTRATE_RESPONSE,
-    LOGOUT_REQUEST
+    LOGOUT_REQUEST,
+    LOGOUT_ERROR,
+    LOGOUT_RESPONSE,
 } from './constants'
 import { AuthState } from "./types";
 import { AuthActions } from "./actions";
@@ -85,8 +87,28 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
             }
         }
         case LOGOUT_REQUEST: {
-            return {
-                ...state,
+            return { ...state, loading: true }
+        }
+        case LOGOUT_ERROR: {
+            return { ...state, loading: false }
+        }
+
+        case LOGOUT_RESPONSE: {
+            const {
+                success
+            } = action.payload
+            if (success) {
+                return {
+                    ...state,
+                    user: null,
+                    token: null,
+                    loading: false
+                }
+            } else {
+                return {
+                    ...state,
+                    loading: false
+                }
             }
         }
         default:
