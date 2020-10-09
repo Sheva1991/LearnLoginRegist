@@ -7,6 +7,11 @@ import { RootState } from '../../app/store';
 const PrivateRoute: React.FC<RouteProps> = (props) => {
     const { token, user } = useSelector((state: RootState) => state.auth)
 
+    // const { user, token } = useSelector((state: RootState) => ({
+    //     user: selectUser(state),
+    //     token: selectToken(state)
+    // }))
+
     if (!token || !user) {
         return <Redirect from={props.path?.toString()} to={{ pathname: ROUTES.auth.login }} />
     }

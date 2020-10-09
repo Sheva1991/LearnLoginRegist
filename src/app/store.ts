@@ -23,21 +23,23 @@ let authToken = STORAGE.getItem('token') ? STORAGE.getItem('token') : null;
 
 store.subscribe(() => {
     const state = store.getState()
-    // const newToken = state.auth.token;
+    const newToken = state.auth.token;
 
-    // if (authToken !== newToken) {
-    //     STORAGE.setItem('token', newToken)
-    //     authToken = newToken;
-    //     API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
-    // }
+    API.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
 
-    const token = state.auth.token
-    if (token !== null) {
-        STORAGE.setItem('token', token)
-    } else {
-        STORAGE.clear()
+    if (authToken !== newToken) {
+        STORAGE.setItem('token', newToken)
+        API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+        authToken = newToken;
     }
-    API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+
+    // const token = state.auth.token
+    // if (token !== null) {
+    //     STORAGE.setItem('token', token)
+    // } else {
+    //     STORAGE.clear()
+    // }
+    // API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 })
 

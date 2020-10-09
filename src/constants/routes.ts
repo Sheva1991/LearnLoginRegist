@@ -1,5 +1,4 @@
 export const ROUTES = {
-    default: '/',
     auth: {
         main: '/auth',
         login: '/auth/login',

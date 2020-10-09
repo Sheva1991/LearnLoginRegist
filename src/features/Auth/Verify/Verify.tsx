@@ -13,6 +13,10 @@ const Verify = () => {
     const dispatch = useDispatch()
     const verified = useSelector((state: RootState) => state.auth.user?.verified)
     const loading = useSelector((state: RootState) => state.auth.loading)
+    // const { loading, verified } = useSelector((state: RootState) => ({
+    //     loading: selectLoading(state),
+    //     verified: selectVerifyied(state)
+    // }))
     const { search } = useLocation()
 
     const handleClick = useCallback(

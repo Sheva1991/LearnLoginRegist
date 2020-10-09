@@ -27,7 +27,7 @@ const AppLoader: React.FC = ({ children }) => {
 
     return (
         <>
-            { !loaded ? children
+            { loaded ? children
 
                 : <Container className={classes.root}>
                     <CircularProgress />

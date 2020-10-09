@@ -20,19 +20,19 @@ export const Routes = () => {
                 <AuthRoute path={ROUTES.auth.main}>
                     <Auth>
                         <Switch>
-                            <Route path={ROUTES.auth.login} component={Login} />
+                            <Route exact path={ROUTES.auth.login} component={Login} />
                             <Route exact path={ROUTES.auth.recoverPassword} component={Recovery} />
-                            <Route path={ROUTES.auth.registration} component={Registration} />
+                            <Route exact path={ROUTES.auth.registration} component={Registration} />
                             <Route exact path={ROUTES.auth.verify} component={Verify} />
                         </Switch>
                     </Auth>
                 </AuthRoute>
-                <PrivateRoute path="/">
+                <PrivateRoute path={ROUTES.account.main}>
                     <Account>
                         <Switch>
-                            <Route path={ROUTES.account.users} component={Users} />
-                            <Route path={ROUTES.account.posts} component={Posts} />
-                            <Route path={ROUTES.account.post} component={PostInfo} />
+                            <Route exact path={ROUTES.account.users} component={Users} />
+                            <Route exact path={ROUTES.account.posts} component={Posts} />
+                            <Route exact path={ROUTES.account.post} component={PostInfo} />
                         </Switch>
                     </Account>
                 </PrivateRoute>

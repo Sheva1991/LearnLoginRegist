@@ -5,6 +5,7 @@ import Post from './components/Post'
 import { useStyles } from './styles';
 import Pagination from '@material-ui/lab/Pagination';
 import SimpleModal from 'components/Modal/Modal';
+import withVerify from 'hoc';
 
 
 export const data = [
@@ -46,4 +47,4 @@ const Posts = memo(() => {
 }
 )
 
-export default Posts
+export default withVerify(Posts)
