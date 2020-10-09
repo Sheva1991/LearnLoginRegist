@@ -1,15 +1,14 @@
 import auth from "features/Auth/reducer";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
-// import posts from "../features/Posts/reducer";
-// import users from "../features/Users/reducer";
 import { STORAGE } from '../utils/storage';
 import API from 'api/api';
+import users from '../features/Account/Users/reducer';
 
 const reducers = combineReducers({
     auth,
+    users,
     // posts,
-    // users,
 });
 
 export type RootState = ReturnType<typeof reducers>
@@ -28,7 +27,11 @@ store.subscribe(() => {
     API.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
 
     if (authToken !== newToken) {
-        STORAGE.setItem('token', newToken)
+        if (newToken !== null) {
+            STORAGE.setItem('token', newToken)
+        } else {
+            STORAGE.removeItem('token')
+        }
         API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
         authToken = newToken;
     }

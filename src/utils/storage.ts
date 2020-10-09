@@ -7,5 +7,8 @@ export const STORAGE = {
     },
     clear() {
         localStorage.clear()
+    },
+    removeItem(name: string) {
+        localStorage.removeItem(name)
     }
 }

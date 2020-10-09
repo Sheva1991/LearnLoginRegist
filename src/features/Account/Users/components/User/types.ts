@@ -2,7 +2,7 @@ import { User } from '../../types';
 
 
 
-export type UserProps = {
+export type PropsType = {
     user: User
 }
 

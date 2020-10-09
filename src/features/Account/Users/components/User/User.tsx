@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserProps } from './types';
+import { PropsType } from './types';
 import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
@@ -7,16 +7,17 @@ import { useStyles } from './styles';
 
 
 
-const User: React.FC<UserProps> = ({ user }) => {
+const User: React.FC<PropsType> = ({ user }) => {
     const classes = useStyles()
     return (
         <Card>
-            <CardMedia
-                component='img'
-                image={user.photo}
-                title="User photo"
-                height="150"
-            />
+            {user.photo ?
+                <CardMedia
+                    component='img'
+                    image={user.photo}
+                    title="User photo"
+                    height="150"
+                /> : null}
             <CardContent>
                 <Typography variant="h4" component="h2">
                     Имя: {user.name}
