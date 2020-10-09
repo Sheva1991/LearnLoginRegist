@@ -6,10 +6,10 @@ import { CircularProgress, Container } from '@material-ui/core';
 import { useStyles } from './styles';
 
 const AppLoader: React.FC = ({ children }) => {
+    const classes = useStyles()
     const { token, user } = useSelector((state: RootState) => state.auth)
-    const [loaded, setLoaded] = useState(!token)
+    const [loaded, setLoaded] = useState(!token);
     const dispatch = useDispatch()
-    const classes = useStyles();
 
     useEffect(() => {
         if (token) {

@@ -6,7 +6,7 @@ import { useStyles } from './styles';
 import { Provider } from 'react-redux';
 import store from './store';
 import { theme } from '../theme/theme';
-import AppLoader from '../components/AppLoader/AppLoader';
+import AppLoader from "../components/AppLoader";
 
 
 const App = () => {

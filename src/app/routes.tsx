@@ -11,7 +11,7 @@ import Verify from 'features/Auth/Verify';
 import Users from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
-import AuthRoute from '../components/AuthRoute/AuthRoute';
+import AuthRoute from 'components/AuthRoute/AuthRoute';
 
 export const Routes = () => {
     return (
@@ -27,7 +27,7 @@ export const Routes = () => {
                         </Switch>
                     </Auth>
                 </AuthRoute>
-                <PrivateRoute path='/'>
+                <PrivateRoute path="/">
                     <Account>
                         <Switch>
                             <Route path={ROUTES.account.users} component={Users} />
