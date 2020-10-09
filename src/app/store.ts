@@ -19,16 +19,26 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
+let authToken = STORAGE.getItem('token') ? STORAGE.getItem('token') : null;
 
 store.subscribe(() => {
     const state = store.getState()
+    // const newToken = state.auth.token;
+
+    // if (authToken !== newToken) {
+    //     STORAGE.setItem('token', newToken)
+    //     authToken = newToken;
+    //     API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+    // }
+
     const token = state.auth.token
     if (token !== null) {
         STORAGE.setItem('token', token)
     } else {
         STORAGE.clear()
     }
-    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+
 })
 
 export default store;

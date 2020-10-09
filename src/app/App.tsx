@@ -6,6 +6,7 @@ import { useStyles } from './styles';
 import { Provider } from 'react-redux';
 import store from './store';
 import { theme } from '../theme/theme';
+import AppLoader from '../components/AppLoader/AppLoader';
 
 
 const App = () => {
@@ -16,9 +17,11 @@ const App = () => {
       <Provider store={store}>
         <ThemeProvider theme={theme} >
           <CssBaseline />
-          <Box className={classes.root}>
-            <Routes />
-          </Box>
+          <AppLoader>
+            <Box className={classes.root}>
+              <Routes />
+            </Box>
+          </AppLoader>
         </ThemeProvider>
       </Provider>
     </BrowserRouter>

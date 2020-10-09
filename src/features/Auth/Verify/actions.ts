@@ -18,7 +18,7 @@ export const verifyResponse = createActionWithPayload<typeof VERIFY_RESPONSE, Re
 export const verifyAccount = (hash: string): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(verifyRequest())
     try {
-        const { data: { data } } = await API.get<{ data: { id: number, email: string, verified: boolean } }>(`auth/verify/email-verify/${hash}`);
+        const { data: { data } } = await API.get<{ data: { id: number, email: string, verified: boolean } }>(`auth/email-verify/${hash}`);
         dispatch(verifyResponse(data));
     } catch {
         dispatch(verifyError())
