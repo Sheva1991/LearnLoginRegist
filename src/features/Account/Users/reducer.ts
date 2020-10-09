@@ -8,7 +8,7 @@ import { UsersActions } from "./actions";
 
 
 const initialState = {
-    data: [],
+    data: null,
     fetching: false,
     error: false
 } as UsersState;
@@ -24,14 +24,11 @@ const users = (state: UsersState = initialState, action: UsersActions): UsersSta
         }
 
         case FETCH_RESPONSE: {
-            const {
-                data
-            } = action.payload
             return {
                 ...state,
                 fetching: false,
                 error: false,
-                data,
+                data: action.payload,
             }
         }
         default:

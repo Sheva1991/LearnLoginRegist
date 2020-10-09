@@ -6,13 +6,9 @@ export interface User {
 }
 
 export interface UsersState {
-    data: User[],
+    data: User[] | null,
     fetching: boolean,
     error: boolean
-}
-
-export interface ResponseList<T> {
-    data: T[]
 }
 
 

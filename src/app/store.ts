@@ -18,7 +18,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
-let authToken = STORAGE.getItem('token') ? STORAGE.getItem('token') : null;
+let authToken = STORAGE.getItem('token') || null;
+
+
 
 store.subscribe(() => {
     const state = store.getState()
@@ -35,14 +37,6 @@ store.subscribe(() => {
         API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
         authToken = newToken;
     }
-
-    // const token = state.auth.token
-    // if (token !== null) {
-    //     STORAGE.setItem('token', token)
-    // } else {
-    //     STORAGE.clear()
-    // }
-    // API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 })
 

@@ -1,3 +1,3 @@
-export interface FormValues {
-    email: string;
+export interface RecoveryValues {
+    email?: string;
 }

@@ -1,33 +1,12 @@
 export interface AuthState {
-    user: UserType | null,
+    user: User | null,
     token: null | string,
     loading: boolean,
     error: string | null
 }
 
-export interface UserType {
+export interface User {
     id: number | null,
-    email: string,
-    verified: boolean
-}
-
-export interface LoginValues {
-    email: string,
-    password: string
-}
-export interface RegistrateValues {
-    email: string,
-    password: string,
-    password_confirmation: string
-}
-
-export interface ResponseLogin {
-    user: UserType,
-    token: string
-}
-
-export interface ResponseAuthorize {
-    id: number,
     email: string,
     verified: boolean
 }
@@ -35,9 +14,5 @@ export interface ResponseAuthorize {
 export interface ResponseLogout {
     success: boolean
 }
-export interface ResponseVerify {
-    id: number,
-    email: string,
-    verified: boolean
-}
+
 

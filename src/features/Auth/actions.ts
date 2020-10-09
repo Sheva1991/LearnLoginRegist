@@ -11,14 +11,15 @@ import {
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
-import { ResponseAuthorize, ResponseLogout } from './types';
+import { ResponseLogout } from './types';
 import { loginRequest, loginError, loginResponse } from './Login/actions';
 import { registrateRequest, registrateError, registrateResponse } from './Registration/actions';
 import { verifyRequest, verifyError, verifyResponse } from './Verify/actions';
+import { User } from './types';
 
 export const authorizeRequest = createAction<typeof AUTHORIZE_REQUEST>(AUTHORIZE_REQUEST);
 export const authorizeError = createAction<typeof AUTHORIZE_ERROR>(AUTHORIZE_ERROR);
-export const authorizeResponse = createActionWithPayload<typeof AUTHORIZE_RESPONSE, ResponseAuthorize>(AUTHORIZE_RESPONSE);
+export const authorizeResponse = createActionWithPayload<typeof AUTHORIZE_RESPONSE, User>(AUTHORIZE_RESPONSE);
 export const logoutRequest = createAction<typeof LOGOUT_REQUEST>(LOGOUT_REQUEST);
 export const logoutError = createAction<typeof LOGOUT_ERROR>(LOGOUT_ERROR);
 export const logoutResponse = createActionWithPayload<typeof LOGOUT_RESPONSE, ResponseLogout>(LOGOUT_RESPONSE);
@@ -27,7 +28,7 @@ export const logoutResponse = createActionWithPayload<typeof LOGOUT_RESPONSE, Re
 export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(authorizeRequest())
     try {
-        const { data: { data } } = await API.get<{ data: { id: number, email: string, verified: boolean } }>(`auth/authorize`);
+        const { data } = await API.get<User>(`auth/authorize`);
         dispatch(authorizeResponse(data));
     } catch {
         dispatch(authorizeError())
@@ -37,7 +38,7 @@ export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> 
 export const logout = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(logoutRequest())
     try {
-        const { data: { data } } = await API.get<{ data: { success: boolean } }>(`auth/logout`);
+        const { data } = await API.get<ResponseLogout>(`auth/logout`);
         dispatch(logoutResponse(data));
     } catch {
         dispatch(logoutError())

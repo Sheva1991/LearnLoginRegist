@@ -6,7 +6,6 @@ import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'app/store';
 import { fetchUsers } from './actions';
-import withVerify from '../../../hoc/withVerify'
 
 
 const Users = memo(() => {
@@ -14,22 +13,6 @@ const Users = memo(() => {
     const { fetching, data } = useSelector((state: RootState) => state.users)
     const classes = useStyles();
     const dispatch = useDispatch()
-    // const data = [
-    //     {
-    //         id: 0,
-    //         name: '1',
-    //         email: '2',
-    //         photo: 'https://i1.wp.com/itc.ua/wp-content/uploads/2016/05/scarlett-johansson-s-black-widow-will-finally-star-in-her-own-movie-marvel-studios-969631.jpg?quality=100&strip=all&ssl=1',
-    //         posts: [
-    //             {
-    //                 id: 3,
-    //                 title: '4',
-    //                 body: '5'
-    //             }
-    //         ]
-
-    //     }
-    // ]
 
     const handleChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
         dispatch(fetchUsers())
@@ -52,7 +35,7 @@ const Users = memo(() => {
                 </Container>
                 :
                 <Grid container spacing={2}>
-                    {data.map((user) =>
+                    {data && data.map((user) =>
                         <Grid item md={4} sm={6} key={user.id}>
                             <User user={user} />
                         </Grid>
@@ -64,4 +47,4 @@ const Users = memo(() => {
 }
 )
 
-export default withVerify(Users)
+export default Users

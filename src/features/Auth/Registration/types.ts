@@ -1,5 +1,5 @@
-export interface FormValues {
-    email: string;
-    password: string;
-    password_confirmation: string
+export interface RegistrateValues {
+    email?: string;
+    password?: string;
+    password_confirmation?: string
 }

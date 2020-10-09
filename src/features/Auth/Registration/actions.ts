@@ -8,7 +8,8 @@ import {
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
-import { RegistrateValues, ResponseLogin, UserType } from '../types';
+import { ResponseLogin } from '../Login/types';
+import { RegistrateValues } from './types';
 
 export const registrateRequest = createAction<typeof REGISTRATE_REQUEST>(REGISTRATE_REQUEST);
 export const registrateError = createAction<typeof REGISTRATE_ERROR>(REGISTRATE_ERROR);
@@ -18,7 +19,7 @@ export const registrateResponse = createActionWithPayload<typeof REGISTRATE_RESP
 export const registrate = (values: RegistrateValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(registrateRequest())
     try {
-        const { data: { data } } = await API.post<{ data: { user: UserType, token: string } }>(`auth/register`, values);
+        const { data } = await API.post<ResponseLogin>(`auth/register`, values);
         dispatch(registrateResponse(data));
     } catch (e) {
         console.log(e)

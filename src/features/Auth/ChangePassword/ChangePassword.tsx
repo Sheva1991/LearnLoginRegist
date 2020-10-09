@@ -1,25 +1,26 @@
 import React, { memo } from 'react'
 import { Field, Formik } from 'formik';
-import { RegistrateValues } from './types';
+import { ChangePasswordValues, PropsType } from './types';
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import FormBox from '../components/FormBox';
+import FormBox from 'features/Auth/components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
-import { registrate } from './actions';
-import Row from '../components/Row';
+import Row from 'features/Auth/components/Row';
 import { TextField } from 'formik-material-ui';
 
 
 
 
-const Registration: React.FC = memo(() => {
+const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
     const mountState = useMount()
-    const dispatch = useDispatch()
 
-    const submit = async (values: RegistrateValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+    const action = (values: ChangePasswordValues) => {
+        console.log('change Password')
+    }
+
+    const submit = async (values: ChangePasswordValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await dispatch(registrate(values))
+            await action(values)
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -27,7 +28,7 @@ const Registration: React.FC = memo(() => {
         }
     }
 
-    return <>
+    return <div>
         <Formik
             initialValues={{}}
             validationSchema={validation}
@@ -35,15 +36,6 @@ const Registration: React.FC = memo(() => {
         >
             {({ isSubmitting, isValid }) => (
                 <FormBox>
-                    <Row>
-                        <Field
-                            component={TextField}
-                            fullWidth={true}
-                            name="email"
-                            type="email"
-                            label="Email"
-                        />
-                    </Row>
                     <Row>
                         <Field
                             component={TextField}
@@ -57,19 +49,19 @@ const Registration: React.FC = memo(() => {
                         <Field
                             component={TextField}
                             fullWidth={true}
-                            name="password_confirmation"
+                            name="passwordConfirm"
                             type="password"
                             label="Confirm Password"
                         />
                     </Row>
                     <Button type='submit' variant="contained" color="primary" disabled={isSubmitting || !isValid}>
-                        Registrate
+                        Change Password
                     </Button>
                 </FormBox>
             )}
-        </Formik>
-    </>
+        </Formik >
+    </div >
 })
 
-export default Registration
+export default ChangePassword
 

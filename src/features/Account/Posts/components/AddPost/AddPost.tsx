@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import { Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { Box, Button } from '@material-ui/core';
 import { Post } from 'features/Account/Posts/types';
 import { validation } from './validation';
 import { useMount } from 'hooks/useMount';
 import FormBox from 'features/Auth/components/FormBox';
-import FieldBox from 'features/Auth/components/FieldBox';
+import Row from 'features/Auth/components/Row';
 
 
 
@@ -37,17 +37,21 @@ const AddPost: React.FC = memo(() => {
             {({ isSubmitting, isValid }) => (
 
                 <FormBox>
-                    <FieldBox
-                        name="title"
-                        type="text"
-                        label="Название"
-                    />
-                    <FieldBox
-                        name="body"
-                        type="textarea"
-                        label="Содержание"
-                        variant="outlined"
-                    />
+                    <Row>
+                        <Field
+                            name="title"
+                            type="text"
+                            label="Название"
+                        />
+                    </Row>
+                    <Row>
+                        <Field
+                            name="body"
+                            type="textarea"
+                            label="Содержание"
+                            variant="outlined"
+                        />
+                    </Row>
                     <Box margin={1}>
                         <Button type='submit' variant="contained" color="primary" fullWidth disabled={isSubmitting || !isValid}>
                             Add post

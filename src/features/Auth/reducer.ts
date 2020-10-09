@@ -22,7 +22,7 @@ import { STORAGE } from '../../utils/storage';
 
 const initialState = {
     user: null,
-    token: STORAGE.getItem('token') ? STORAGE.getItem('token') : null,
+    token: STORAGE.getItem('token') || null,
     loading: false,
     error: null
 } as AuthState;
@@ -35,18 +35,9 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
 
         case AUTHORIZE_RESPONSE: {
             const token = localStorage.getItem('token')
-            const {
-                id,
-                email,
-                verified
-            } = action.payload
             return {
                 ...state,
-                user: {
-                    id: id,
-                    email: email,
-                    verified: verified
-                },
+                user: action.payload,
                 token: token,
                 loading: false
             }
@@ -68,8 +59,8 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
             } = action.payload
             return {
                 ...state,
-                user: user,
-                token: token,
+                user,
+                token,
                 loading: false
             }
         }
@@ -90,8 +81,8 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
             } = action.payload
             return {
                 ...state,
-                user: user,
-                token: token,
+                user,
+                token,
                 loading: false
             }
         }
@@ -106,21 +97,10 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         }
 
         case LOGOUT_RESPONSE: {
-            const {
-                success
-            } = action.payload
-            if (success) {
-                return {
-                    ...state,
-                    user: null,
-                    token: null,
-                    loading: false
-                }
-            } else {
-                return {
-                    ...state,
-                    loading: false
-                }
+            return {
+                ...initialState,
+                token: null,
+                loading: false
             }
         }
         case LOGOUT_ERROR: {
@@ -131,18 +111,9 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         }
 
         case VERIFY_RESPONSE: {
-            const {
-                id,
-                email,
-                verified
-            } = action.payload
             return {
                 ...state,
-                user: {
-                    id: id,
-                    email: email,
-                    verified: verified
-                },
+                user: action.payload,
                 loading: false
             }
         }

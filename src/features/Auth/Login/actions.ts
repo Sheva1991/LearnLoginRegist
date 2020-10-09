@@ -8,7 +8,8 @@ import {
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
-import { ResponseLogin, LoginValues, UserType } from '../types';
+import { LoginValues, ResponseLogin } from './types';
+// import { UserType } from '../types';
 
 
 export const loginRequest = createAction<typeof LOGIN_REQUEST>(LOGIN_REQUEST);
@@ -19,7 +20,7 @@ export const loginResponse = createActionWithPayload<typeof LOGIN_RESPONSE, Resp
 export const login = (values: LoginValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(loginRequest())
     try {
-        const { data: { data } } = await API.post<{ data: { user: UserType, token: string } }>(`auth/login`, values);
+        const { data } = await API.post<ResponseLogin>(`auth/login`, values);
         dispatch(loginResponse(data));
         localStorage.setItem('token', data.token)
     } catch {
