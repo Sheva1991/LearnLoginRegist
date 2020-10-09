@@ -3,7 +3,6 @@ import React, { memo } from 'react'
 import User from './components/User'
 import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
-import withVerify from 'hoc';
 
 
 const Users = memo(() => {
@@ -49,4 +48,4 @@ const Users = memo(() => {
 }
 )
 
-export default withVerify(Users)
+export default Users

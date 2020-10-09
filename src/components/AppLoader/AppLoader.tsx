@@ -4,10 +4,15 @@ import { RootState } from '../../app/store';
 import { authorize } from '../../features/Auth/actions';
 import { CircularProgress, Container } from '@material-ui/core';
 import { useStyles } from './styles';
+import { selectUser, selectToken } from './selectors';
 
 const AppLoader: React.FC = ({ children }) => {
     const classes = useStyles()
-    const { token, user } = useSelector((state: RootState) => state.auth)
+    // const { token, user } = useSelector((state: RootState) => state.auth)
+    const { user, token } = useSelector((state: RootState) => ({
+        user: selectUser(state),
+        token: selectToken(state)
+    }))
     const [loaded, setLoaded] = useState(!token);
     const dispatch = useDispatch()
 

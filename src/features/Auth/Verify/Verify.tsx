@@ -6,17 +6,18 @@ import { verifyAccount } from './actions';
 import { RootState } from '../../../app/store';
 import { useStyles } from './styles';
 import { ROUTES } from '../../../constants/routes';
+import { selectLoading, selectVerifyied } from './selectors';
 const queryString = require('query-string');
 
 const Verify = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const verified = useSelector((state: RootState) => state.auth.user?.verified)
-    const loading = useSelector((state: RootState) => state.auth.loading)
-    // const { loading, verified } = useSelector((state: RootState) => ({
-    //     loading: selectLoading(state),
-    //     verified: selectVerifyied(state)
-    // }))
+    // const verified = useSelector((state: RootState) => state.auth.user?.verified)
+    // const loading = useSelector((state: RootState) => state.auth.loading)
+    const { loading, verified } = useSelector((state: RootState) => ({
+        loading: selectLoading(state),
+        verified: selectVerifyied(state)
+    }))
     const { search } = useLocation()
 
     const handleClick = useCallback(
