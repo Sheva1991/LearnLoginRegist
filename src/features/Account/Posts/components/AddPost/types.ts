@@ -1,5 +1,5 @@
 import { Post } from 'features/Account/Posts/types';
 
-export interface FormValues {
+export interface PostValues {
     post: Post;
 }

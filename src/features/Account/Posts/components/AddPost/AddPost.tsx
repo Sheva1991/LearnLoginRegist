@@ -6,6 +6,7 @@ import { validation } from './validation';
 import { useMount } from 'hooks/useMount';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
+import { TextField } from 'formik-material-ui';
 
 
 
@@ -39,6 +40,8 @@ const AddPost: React.FC = memo(() => {
                 <FormBox>
                     <Row>
                         <Field
+                            component={TextField}
+                            fullWidth={true}
                             name="title"
                             type="text"
                             label="Название"
@@ -46,6 +49,8 @@ const AddPost: React.FC = memo(() => {
                     </Row>
                     <Row>
                         <Field
+                            component={TextField}
+                            fullWidth={true}
                             name="body"
                             type="textarea"
                             label="Содержание"

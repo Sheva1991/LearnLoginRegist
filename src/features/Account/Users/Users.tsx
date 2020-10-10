@@ -4,24 +4,25 @@ import User from './components/User'
 import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'app/store';
 import { fetchUsers } from './actions';
+import { selectData, selectFetching } from './selectors';
 
 
 const Users = memo(() => {
     const [page, setPage] = useState(1)
-    const { fetching, data } = useSelector((state: RootState) => state.users)
+    const data = useSelector(selectData)
+    const fetching = useSelector(selectFetching)
     const classes = useStyles();
     const dispatch = useDispatch()
 
     const handleChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
         dispatch(fetchUsers())
         setPage(value)
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchUsers())
-    }, [])
+    }, [dispatch])
 
     return (
         <Container className={classes.root}>

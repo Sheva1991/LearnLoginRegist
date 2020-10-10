@@ -30,7 +30,7 @@ const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
 
     return <div>
         <Formik
-            initialValues={{}}
+            initialValues={{ password: '', passwordConfirm: '' }}
             validationSchema={validation}
             onSubmit={submit}
         >

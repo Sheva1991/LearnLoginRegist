@@ -4,11 +4,12 @@ import thunkMiddleware from "redux-thunk";
 import { STORAGE } from '../utils/storage';
 import API from 'api/api';
 import users from '../features/Account/Users/reducer';
+import posts from '../features/Account/Posts/reducer';
 
 const reducers = combineReducers({
     auth,
     users,
-    // posts,
+    posts,
 });
 
 export type RootState = ReturnType<typeof reducers>

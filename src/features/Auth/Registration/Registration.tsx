@@ -29,7 +29,7 @@ const Registration: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{}}
+            initialValues={{ email: '', password: '', password_confirmation: '' }}
             validationSchema={validation}
             onSubmit={submit}
         >

@@ -33,7 +33,7 @@ const Recovery: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{}}
+            initialValues={{ email: '' }}
             validationSchema={validation}
             onSubmit={submit}
         >
