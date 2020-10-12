@@ -8,17 +8,17 @@ import {
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
-import { User } from '../types';
+import { AuthUser } from '../types';
 
 export const verifyRequest = createAction<typeof VERIFY_REQUEST>(VERIFY_REQUEST);
 export const verifyError = createAction<typeof VERIFY_ERROR>(VERIFY_ERROR);
-export const verifyResponse = createActionWithPayload<typeof VERIFY_RESPONSE, User>(VERIFY_RESPONSE);
+export const verifyResponse = createActionWithPayload<typeof VERIFY_RESPONSE, AuthUser>(VERIFY_RESPONSE);
 
 
 export const verifyAccount = (hash: string): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(verifyRequest())
     try {
-        const { data } = await API.get<User>(`auth/email-verify/${hash}`);
+        const { data } = await API.get<AuthUser>(`auth/email-verify/${hash}`);
         dispatch(verifyResponse(data));
     } catch {
         dispatch(verifyError())

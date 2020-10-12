@@ -1,10 +1,10 @@
-import { User } from '../types';
+import { AuthUser } from '../types';
 export interface LoginValues {
     email?: string;
     password?: string;
 }
 
 export interface ResponseLogin {
-    user: User,
+    user: AuthUser,
     token: string
 }
