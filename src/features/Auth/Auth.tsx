@@ -9,8 +9,8 @@ const Auth: React.FC = ({ children }) => {
     return (
         <Container className={classes.root}>
             <Box width='50%'>
-                <Paper elevation={3} className={classes.paper}>
-                    {children}
+                <Paper elevation={3}>
+                    <Box width='100%' p={12} bgcolor='rgb(25,118,210)' color='#fff'>{children}</Box>
                 </Paper>
             </Box>
         </Container>

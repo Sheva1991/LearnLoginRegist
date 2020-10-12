@@ -14,8 +14,12 @@ export const theme = createMuiTheme({
         MuiFormLabel: {
             root: {
                 color: '#fff',
-                fontSize: '16px'
-            }
+                fontSize: '16px',
+                "&$focused": {
+                    color: '#fff'
+                }
+            },
+
         }
     }
 });
