@@ -17,24 +17,34 @@ export const Routes = () => {
     return (
         <>
             <Switch>
-                <Route path={ROUTES.auth.main}>
+                <AuthRoute path={[ROUTES.auth.login, ROUTES.auth.registration, ROUTES.auth.recoverPassword]}>
                     <Auth>
                         <Switch>
-                            <AuthRoute exact path={ROUTES.auth.login} component={Login} />
+                            <Route exact path={ROUTES.auth.login} component={Login} />
+                            <Route exact path={ROUTES.auth.registration} component={Registration} />
                             <Route exact path={ROUTES.auth.recoverPassword} component={Recovery} />
-                            <AuthRoute exact path={ROUTES.auth.registration} component={Registration} />
-                            <Route exact path={ROUTES.auth.verify} component={Verify} />
                         </Switch>
                     </Auth>
-                </Route>
+                </AuthRoute>
                 <PrivateRoute path={ROUTES.account.main}>
-                    <Account>
-                        <Switch>
-                            <Route exact path={ROUTES.account.users} component={Users} />
-                            <Route exact path={ROUTES.account.posts} component={Posts} />
-                            <Route exact path={ROUTES.account.post} component={PostInfo} />
-                        </Switch>
-                    </Account>
+                    <Switch>
+                        <Route path={ROUTES.auth.verify}>
+                            <Auth>
+                                <Switch>
+                                    <Route exact path={ROUTES.auth.verify} component={Verify} />
+                                </Switch>
+                            </Auth>
+                        </Route>
+                        <Route path={ROUTES.account.main}>
+                            <Account>
+                                <Switch>
+                                    <Route exact path={ROUTES.account.users} component={Users} />
+                                    <Route exact path={ROUTES.account.posts} component={Posts} />
+                                    <Route exact path={ROUTES.account.post} component={PostInfo} />
+                                </Switch>
+                            </Account>
+                        </Route>
+                    </Switch>
                 </PrivateRoute>
             </Switch>
         </>

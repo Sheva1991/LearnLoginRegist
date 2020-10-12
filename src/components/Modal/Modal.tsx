@@ -12,13 +12,11 @@ const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
 
     const handleOpen = useCallback(() => {
         setOpen(true);
-    }, []
-    )
+    }, [])
 
     const handleClose = useCallback(() => {
         setOpen(false);
-    }, []
-    )
+    }, [])
 
     return (
         <>
@@ -28,10 +26,10 @@ const SimpleModal: React.FC<PropsType> = ({ btnTitle, children }) => {
             <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
             >
-                <Paper elevation={3} className={classes.paper}>{children}</Paper>
+                <Paper elevation={3} className={classes.paper}>
+                    {children}
+                </Paper>
             </Modal>
         </>
     );

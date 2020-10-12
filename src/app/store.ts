@@ -21,8 +21,6 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddle
 
 let authToken = STORAGE.getItem('token') || null;
 
-
-
 store.subscribe(() => {
     const state = store.getState()
     const newToken = state.auth.token;

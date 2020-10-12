@@ -34,7 +34,7 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         }
 
         case AUTHORIZE_RESPONSE: {
-            const token = localStorage.getItem('token')
+            const token = STORAGE.getItem('token')
             return {
                 ...state,
                 user: action.payload,
@@ -99,8 +99,7 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         case LOGOUT_RESPONSE: {
             return {
                 ...initialState,
-                token: null,
-                loading: false
+                token: null
             }
         }
         case LOGOUT_ERROR: {

@@ -23,8 +23,7 @@ const MenuListComposition = () => {
 
     const handleToggle = useCallback(() => {
         setOpen((prevOpen) => !prevOpen);
-    }, []
-    )
+    }, [])
 
     const handleClose = useCallback(
         (event: React.MouseEvent<EventTarget>) => {
@@ -32,22 +31,19 @@ const MenuListComposition = () => {
                 return;
             }
             setOpen(false);
-        }, []
-    )
+        }, [])
 
     const handleLogout = useCallback((e: React.MouseEvent<EventTarget>) => {
         dispatch(logout())
         handleClose(e)
-    }, [dispatch, handleClose]
-    )
+    }, [dispatch, handleClose])
 
     const handleListKeyDown = useCallback((event: React.KeyboardEvent) => {
         if (event.key === 'Tab') {
             event.preventDefault();
             setOpen(false);
         }
-    }, []
-    )
+    }, [])
 
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = useRef(open);

@@ -53,6 +53,7 @@ const AddPost: React.FC = memo(() => {
                             fullWidth={true}
                             name="body"
                             type="textarea"
+                            multiline={true}
                             label="Содержание"
                             variant="outlined"
                         />

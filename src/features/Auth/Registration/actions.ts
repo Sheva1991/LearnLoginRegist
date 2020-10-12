@@ -22,7 +22,6 @@ export const registrate = (values: RegistrateValues): ThunkAction<void, RootStat
         const { data } = await API.post<ResponseLogin>(`auth/register`, values);
         dispatch(registrateResponse(data));
     } catch (e) {
-        console.log(e)
         dispatch(registrateError())
     }
 }

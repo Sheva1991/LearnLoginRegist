@@ -31,9 +31,7 @@ const Login: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{
-                email: '', password: '',
-            }}
+            initialValues={{}}
             validationSchema={validation}
             onSubmit={submit}
         >
