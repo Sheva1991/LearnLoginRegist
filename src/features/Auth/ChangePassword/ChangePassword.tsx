@@ -6,7 +6,7 @@ import FormBox from 'features/Auth/components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import Row from 'features/Auth/components/Row';
-import { TextField } from 'formik-material-ui';
+import TextField from 'components/Fields/TextField';
 
 
 
@@ -30,7 +30,7 @@ const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
 
     return <div>
         <Formik
-            initialValues={{ password: '', passwordConfirm: '' }}
+            initialValues={{}}
             validationSchema={validation}
             onSubmit={submit}
         >
@@ -39,7 +39,6 @@ const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="password"
                             type="password"
                             label="Password"
@@ -48,7 +47,6 @@ const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="passwordConfirm"
                             type="password"
                             label="Confirm Password"

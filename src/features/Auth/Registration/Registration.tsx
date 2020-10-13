@@ -8,7 +8,7 @@ import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import { registrate } from './actions';
 import Row from '../components/Row';
-import { TextField } from 'formik-material-ui';
+import TextField from 'components/Fields/TextField';
 
 
 
@@ -29,7 +29,7 @@ const Registration: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{ email: '', password: '', password_confirmation: '' }}
+            initialValues={{}}
             validationSchema={validation}
             onSubmit={submit}
         >
@@ -38,7 +38,6 @@ const Registration: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="email"
                             type="email"
                             label="Email"
@@ -47,7 +46,6 @@ const Registration: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="password"
                             type="password"
                             label="Password"
@@ -56,7 +54,6 @@ const Registration: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="password_confirmation"
                             type="password"
                             label="Confirm Password"

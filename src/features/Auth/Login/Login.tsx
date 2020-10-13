@@ -10,7 +10,7 @@ import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import { login } from './actions';
 import Row from '../components/Row/Row';
-import { TextField } from 'formik-material-ui';
+import TextField from 'components/Fields/TextField';
 
 
 
@@ -40,7 +40,6 @@ const Login: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="email"
                             type="email"
                             label="Email"
@@ -49,7 +48,6 @@ const Login: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            fullWidth={true}
                             name="password"
                             type="password"
                             label="Password"
