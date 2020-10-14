@@ -1,29 +1,26 @@
 import React, { memo } from 'react'
 import { Field, Formik } from 'formik';
 import { RecoveryValues } from './types';
-import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import FormBox from '../components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import Row from '../components/Row';
 import TextField from 'components/Fields/TextField';
+import { useDispatch } from 'react-redux';
+import { recovery } from './actions';
 
 
 
 
 const Recovery: React.FC = memo(() => {
     const mountState = useMount()
-    const history = useHistory()
+    const dispatch = useDispatch()
 
-    const action = (values: RecoveryValues) => {
-        console.log('recoverPassword')
-    }
 
     const submit = async (values: RecoveryValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await action(values)
-            history.push('/login')
+            await dispatch(recovery(values))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)

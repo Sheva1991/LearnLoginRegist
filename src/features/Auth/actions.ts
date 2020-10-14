@@ -11,18 +11,20 @@ import {
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
-import { ResponseLogout } from './types';
 import { loginRequest, loginError, loginResponse } from './Login/actions';
 import { registrateRequest, registrateError, registrateResponse } from './Registration/actions';
 import { verifyRequest, verifyError, verifyResponse } from './Verify/actions';
 import { AuthUser } from './types';
+import { recoveryRequest, recoveryError, recoveryResponse } from './Recovery/actions';
+import { ResponseSuccess } from 'types/types';
+import { resetRequest, resetError, resetResponse } from './ChangePassword/actions';
 
 export const authorizeRequest = createAction<typeof AUTHORIZE_REQUEST>(AUTHORIZE_REQUEST);
 export const authorizeError = createAction<typeof AUTHORIZE_ERROR>(AUTHORIZE_ERROR);
 export const authorizeResponse = createActionWithPayload<typeof AUTHORIZE_RESPONSE, AuthUser>(AUTHORIZE_RESPONSE);
 export const logoutRequest = createAction<typeof LOGOUT_REQUEST>(LOGOUT_REQUEST);
 export const logoutError = createAction<typeof LOGOUT_ERROR>(LOGOUT_ERROR);
-export const logoutResponse = createActionWithPayload<typeof LOGOUT_RESPONSE, ResponseLogout>(LOGOUT_RESPONSE);
+export const logoutResponse = createAction<typeof LOGOUT_RESPONSE>(LOGOUT_RESPONSE);
 
 
 export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
@@ -38,8 +40,12 @@ export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> 
 export const logout = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(logoutRequest())
     try {
-        const { data } = await API.get<ResponseLogout>(`auth/logout`);
-        dispatch(logoutResponse(data));
+        const { data } = await API.get<ResponseSuccess>(`auth/logout`);
+        if (data.success) {
+            dispatch(logoutResponse());
+        } else {
+            throw new Error("Some error occured when logout. Try one more time");
+        }
     } catch {
         dispatch(logoutError())
     }
@@ -61,3 +67,9 @@ export type AuthActions =
     | ReturnType<typeof verifyRequest>
     | ReturnType<typeof verifyError>
     | ReturnType<typeof verifyResponse>
+    | ReturnType<typeof recoveryRequest>
+    | ReturnType<typeof recoveryError>
+    | ReturnType<typeof recoveryResponse>
+    | ReturnType<typeof resetRequest>
+    | ReturnType<typeof resetError>
+    | ReturnType<typeof resetResponse>

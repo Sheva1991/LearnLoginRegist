@@ -29,9 +29,7 @@ const AddPost: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{
-                id: 5, title: '', body: ''
-            }}
+            initialValues={{}}
             validationSchema={validation}
             onSubmit={submit}
         >

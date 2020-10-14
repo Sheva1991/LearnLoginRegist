@@ -1,26 +1,35 @@
 import React, { memo } from 'react'
 import { Field, Formik } from 'formik';
-import { ChangePasswordValues, PropsType } from './types';
+import { ChangePasswordFormValues, PropsType } from './types';
 import { Button } from '@material-ui/core';
 import FormBox from 'features/Auth/components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
+import { useHistory, useLocation } from 'react-router-dom';
+import { resetPassword } from './actions';
+import { useDispatch } from 'react-redux';
+import { ROUTES } from '../../../constants/routes';
+const queryString = require('query-string');
 
 
 
-
-const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
+const ChangePassword: React.FC<PropsType> = memo(() => {
     const mountState = useMount()
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const { search } = useLocation()
+    const { token, email } = queryString.parse(search);
 
-    const action = (values: ChangePasswordValues) => {
-        console.log('change Password')
-    }
-
-    const submit = async (values: ChangePasswordValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+    const submit = async (values: ChangePasswordFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+        const data = { ...values, token, email }
         try {
-            await action(values)
+            await dispatch(resetPassword(data, () => {
+                history.push({
+                    pathname: ROUTES.auth.login,
+                })
+            }))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -47,7 +56,7 @@ const ChangePassword: React.FC<PropsType> = memo(({ password }) => {
                     <Row>
                         <Field
                             component={TextField}
-                            name="passwordConfirm"
+                            name="password_confirmation"
                             type="password"
                             label="Confirm Password"
                         />

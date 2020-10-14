@@ -11,8 +11,6 @@ export interface AuthUser {
     verified: boolean
 }
 
-export interface ResponseLogout {
-    success: boolean
-}
+
 
 

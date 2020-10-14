@@ -9,7 +9,6 @@ import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
 import { LoginValues, ResponseLogin } from './types';
-// import { UserType } from '../types';
 
 
 export const loginRequest = createAction<typeof LOGIN_REQUEST>(LOGIN_REQUEST);

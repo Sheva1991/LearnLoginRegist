@@ -12,17 +12,19 @@ import Users from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthRoute from 'components/AuthRoute/AuthRoute';
+import ChangePassword from '../features/Auth/ChangePassword/ChangePassword';
 
 export const Routes = () => {
     return (
         <>
             <Switch>
-                <AuthRoute path={[ROUTES.auth.login, ROUTES.auth.registration, ROUTES.auth.recoverPassword]}>
+                <AuthRoute path={[ROUTES.auth.login, ROUTES.auth.registration, ROUTES.auth.recoverPassword, ROUTES.auth.resetPassword]}>
                     <Auth>
                         <Switch>
                             <Route exact path={ROUTES.auth.login} component={Login} />
                             <Route exact path={ROUTES.auth.registration} component={Registration} />
                             <Route exact path={ROUTES.auth.recoverPassword} component={Recovery} />
+                            <Route exact path={ROUTES.auth.resetPassword} component={ChangePassword} />
                         </Switch>
                     </Auth>
                 </AuthRoute>

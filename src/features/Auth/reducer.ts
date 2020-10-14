@@ -14,6 +14,12 @@ import {
     VERIFY_REQUEST,
     VERIFY_ERROR,
     VERIFY_RESPONSE,
+    RECOVERY_REQUEST,
+    RECOVERY_ERROR,
+    RECOVERY_RESPONSE,
+    RESET_REQUEST,
+    RESET_ERROR,
+    RESET_RESPONSE,
 } from './constants'
 import { AuthState } from "./types";
 import { AuthActions } from "./actions";
@@ -42,12 +48,9 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
                 loading: false
             }
         }
-
         case AUTHORIZE_ERROR: {
             return { ...state, loading: false }
         }
-
-
         case LOGIN_REQUEST: {
             return { ...state, loading: true }
         }
@@ -69,7 +72,6 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
             return { ...state, loading: false }
         }
 
-
         case REGISTRATE_REQUEST: {
             return { ...state, loading: true }
         }
@@ -86,7 +88,6 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
                 loading: false
             }
         }
-
         case REGISTRATE_ERROR: {
             return { ...state, loading: false }
         }
@@ -95,7 +96,6 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         case LOGOUT_REQUEST: {
             return { ...state, loading: true }
         }
-
         case LOGOUT_RESPONSE: {
             return {
                 ...initialState,
@@ -117,6 +117,26 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
             }
         }
         case VERIFY_ERROR: {
+            return { ...state, loading: false }
+        }
+        case RECOVERY_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case RECOVERY_RESPONSE: {
+            return { ...state, loading: false }
+        }
+        case RECOVERY_ERROR: {
+            return { ...state, loading: false }
+        }
+        case RESET_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case RESET_RESPONSE: {
+            return { ...state, loading: false }
+        }
+        case RESET_ERROR: {
             return { ...state, loading: false }
         }
 
