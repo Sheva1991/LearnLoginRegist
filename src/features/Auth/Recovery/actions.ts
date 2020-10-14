@@ -5,7 +5,7 @@ import {
     RECOVERY_REQUEST,
     RECOVERY_RESPONSE,
 } from '../constants'
-import { createAction, createActionWithPayload } from "utils/redux";
+import { createAction } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
 import { RecoveryValues } from './types';
@@ -14,13 +14,19 @@ import { ResponseSuccess } from '../../../types/types';
 
 export const recoveryRequest = createAction<typeof RECOVERY_REQUEST>(RECOVERY_REQUEST);
 export const recoveryError = createAction<typeof RECOVERY_ERROR>(RECOVERY_ERROR);
-export const recoveryResponse = createActionWithPayload<typeof RECOVERY_RESPONSE, ResponseSuccess>(RECOVERY_RESPONSE);
+export const recoveryResponse = createAction<typeof RECOVERY_RESPONSE>(RECOVERY_RESPONSE);
 
-export const recovery = (values: RecoveryValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
+export const recovery = (values: RecoveryValues, onSuccess: Function): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(recoveryRequest())
     try {
         const { data } = await API.post<ResponseSuccess>(`auth/password-recovery`, values);
-        dispatch(recoveryResponse(data));
+        if (data.success) {
+            dispatch(recoveryResponse());
+            onSuccess()
+        } else {
+            throw new Error("Some error occured when sent recovery token on your email. Try one more time");
+        }
+
     } catch {
         dispatch(recoveryError())
     }

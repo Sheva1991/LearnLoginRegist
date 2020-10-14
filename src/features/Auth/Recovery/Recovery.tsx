@@ -9,18 +9,25 @@ import Row from '../components/Row';
 import TextField from 'components/Fields/TextField';
 import { useDispatch } from 'react-redux';
 import { recovery } from './actions';
+import { useHistory } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 
 
 
 const Recovery: React.FC = memo(() => {
     const mountState = useMount()
+    const history = useHistory()
     const dispatch = useDispatch()
 
 
     const submit = async (values: RecoveryValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await dispatch(recovery(values))
+            await dispatch(recovery(values, () => {
+                history.push({
+                    pathname: ROUTES.auth.login,
+                })
+            }))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
