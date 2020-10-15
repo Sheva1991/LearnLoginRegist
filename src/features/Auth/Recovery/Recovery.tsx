@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Field, Formik } from 'formik';
 import { RecoveryValues } from './types';
-import { Button } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import FormBox from '../components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
@@ -9,30 +9,40 @@ import Row from '../components/Row';
 import TextField from 'components/Fields/TextField';
 import { useDispatch } from 'react-redux';
 import { recovery } from './actions';
-import { useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
+import { NavLink } from 'react-router-dom';
 
 
 
 
 const Recovery: React.FC = memo(() => {
     const mountState = useMount()
-    const history = useHistory()
+    const [message, setMessage] = useState(false)
     const dispatch = useDispatch()
 
 
     const submit = async (values: RecoveryValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await dispatch(recovery(values, () => {
-                history.push({
-                    pathname: ROUTES.auth.login,
-                })
-            }))
+            await dispatch(recovery(values))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
+                setMessage(true)
             }
         }
+    }
+
+    if (message) {
+        return (
+            <Typography variant="h5" align='center' component="h4">
+                Письмо отправлено вам на почту!
+                <Box margin={2}>
+                    <Button variant="contained" color="primary" component={NavLink} to={ROUTES.auth.login}>
+                        Перейти на страницу логина
+                    </Button>
+                </Box>
+            </Typography>
+        )
     }
 
     return <>

@@ -1,13 +1,13 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Field, Formik } from 'formik';
-import { ChangePasswordFormValues, PropsType } from './types';
-import { Button } from '@material-ui/core';
+import { ResetPasswordFormValues, PropsType } from './types';
+import { Box, Button, Typography } from '@material-ui/core';
 import FormBox from 'features/Auth/components/FormBox';
 import { validation } from './validation';
 import { useMount } from '../../../hooks/useMount';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
-import { useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { resetPassword } from './actions';
 import { useDispatch } from 'react-redux';
 import { ROUTES } from '../../../constants/routes';
@@ -15,29 +15,40 @@ const queryString = require('query-string');
 
 
 
-const ChangePassword: React.FC<PropsType> = memo(() => {
+const ResetPassword: React.FC<PropsType> = memo(() => {
     const mountState = useMount()
     const dispatch = useDispatch()
-    const history = useHistory()
+    const [message, setMessage] = useState(false)
     const { search } = useLocation()
     const { token, email } = queryString.parse(search);
 
-    const submit = async (values: ChangePasswordFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+
+    const submit = async (values: ResetPasswordFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         const data = { ...values, token, email }
         try {
-            await dispatch(resetPassword(data, () => {
-                history.push({
-                    pathname: ROUTES.auth.login,
-                })
-            }))
+            await dispatch(resetPassword(data))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
+                setMessage(true)
             }
         }
     }
 
-    return <div>
+    if (message) {
+        return (
+            <Typography variant="h5" align='center' component="h4">
+                Пароль изменен!
+                <Box margin={2}>
+                    <Button variant="contained" color="primary" component={NavLink} to={ROUTES.auth.login}>
+                        Перейти на страницу логина
+                    </Button>
+                </Box>
+            </Typography>
+        )
+    }
+
+    return <>
         <Formik
             initialValues={{}}
             validationSchema={validation}
@@ -67,8 +78,8 @@ const ChangePassword: React.FC<PropsType> = memo(() => {
                 </FormBox>
             )}
         </Formik >
-    </div >
+    </>
 })
 
-export default ChangePassword
+export default ResetPassword
 

@@ -17,7 +17,7 @@ import { verifyRequest, verifyError, verifyResponse } from './Verify/actions';
 import { AuthUser } from './types';
 import { recoveryRequest, recoveryError, recoveryResponse } from './Recovery/actions';
 import { ResponseSuccess } from 'types/types';
-import { resetRequest, resetError, resetResponse } from './ChangePassword/actions';
+import { resetRequest, resetError, resetResponse } from './ResetPassword/actions';
 
 export const authorizeRequest = createAction<typeof AUTHORIZE_REQUEST>(AUTHORIZE_REQUEST);
 export const authorizeError = createAction<typeof AUTHORIZE_ERROR>(AUTHORIZE_ERROR);

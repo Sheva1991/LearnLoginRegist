@@ -6,23 +6,28 @@ import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './actions';
 import { selectData, selectFetching } from './selectors';
+import { useHistory } from 'react-router-dom';
 
 
 const Users = memo(() => {
     const [page, setPage] = useState(1)
+    const history = useHistory()
     const data = useSelector(selectData)
     const fetching = useSelector(selectFetching)
     const classes = useStyles();
     const dispatch = useDispatch()
 
     const handleChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
-        dispatch(fetchUsers())
         setPage(value)
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
-        dispatch(fetchUsers())
-    }, [dispatch])
+        dispatch(fetchUsers(page))
+        history.push({
+            pathname: '/users',
+            search: `page=${page}`
+        })
+    }, [dispatch, history, page])
 
     return (
         <Container className={classes.root}>

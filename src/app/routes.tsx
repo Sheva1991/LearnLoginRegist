@@ -12,7 +12,7 @@ import Users from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthRoute from 'components/AuthRoute/AuthRoute';
-import ChangePassword from '../features/Auth/ChangePassword/ChangePassword';
+import ChangePassword from '../features/Auth/ResetPassword/ResetPassword';
 
 export const Routes = () => {
     return (

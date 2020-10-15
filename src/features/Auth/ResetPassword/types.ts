@@ -1,8 +1,8 @@
-export interface ChangePasswordFormValues {
+export interface ResetPasswordFormValues {
     password?: string;
     password_confirmation?: string
 }
-export interface ChangePasswordValues {
+export interface ResetPasswordValues {
     password?: string;
     password_confirmation?: string,
     token: string,
