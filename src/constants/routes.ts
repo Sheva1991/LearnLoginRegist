@@ -9,8 +9,12 @@ export const ROUTES = {
     },
     account: {
         main: '/',
+        profile: '/profile',
+        profileInfo: '/profile/info',
+        profileEdit: '/profile/edit',
         posts: '/posts',
         post: '/posts/:id?',
         users: '/users',
+        userInfo: '/user/profile/:id?'
     }
 }

@@ -11,12 +11,10 @@ const Account: React.FC = ({ children }) => {
     const verified = useSelector(selectVerifyied)
     return (
         <>
-
             <Header />
             < Container className={classes.root} >
                 <> {verified ? children : <VerifyAlert />}</>
             </Container >
-
         </>
     )
 }

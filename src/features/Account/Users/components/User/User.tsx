@@ -2,36 +2,36 @@ import React from 'react'
 import { PropsType } from './types';
 import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from 'constants/routes';
 import { useStyles } from './styles';
 
 
 
-const User: React.FC<PropsType> = ({ user }) => {
+const User: React.FC<PropsType> = ({ profile }) => {
     const classes = useStyles()
     return (
         <Card>
-            {user.photo ?
+            {profile.avatar ?
                 <CardMedia
                     component='img'
-                    image={user.photo}
+                    image={profile.avatar}
                     title="User photo"
                     height="150"
                 /> : null}
             <CardContent>
+                <Typography variant="h5" component="h3">
+                    Id: {profile.id}
+                </Typography>
                 <Typography variant="h4" component="h2">
-                    Имя: {user.name}
+                    Имя: {profile.name}
                 </Typography>
                 <Typography variant="h5" component="h3">
-                    Пользователь id: {user.id}
+                    Фамилия: {profile.surname}
                 </Typography>
-                <Typography variant="h5" component="h3">
-                    Email: {user.email}
-                </Typography>
+
             </CardContent>
             <CardActions className={classes.btn}>
-                <Link component={NavLink} to={ROUTES.account.posts}>
-                    <Button color='primary' variant="contained">Posts</Button>
+                <Link component={NavLink} to={`/user/profile/${profile.id}`}>
+                    <Button color='primary' variant="contained">more info</Button>
                 </Link>
             </CardActions>
         </Card>

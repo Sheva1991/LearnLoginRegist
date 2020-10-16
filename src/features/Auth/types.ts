@@ -1,3 +1,4 @@
+import { FullProfile } from '../../types/types';
 export interface AuthState {
     user: AuthUser | null,
     token: string | null,
@@ -8,8 +9,11 @@ export interface AuthState {
 export interface AuthUser {
     id: number | null,
     email: string,
-    verified: boolean
+    verified: boolean,
+    profile: FullProfile | null
 }
+
+
 
 
 

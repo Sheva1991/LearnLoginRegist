@@ -22,7 +22,7 @@ const Users = memo(() => {
     }, []);
 
     useEffect(() => {
-        dispatch(fetchUsers(page))
+        dispatch(fetchUsers(page, 5))
         history.push({
             pathname: '/users',
             search: `page=${page}`
@@ -43,7 +43,7 @@ const Users = memo(() => {
                 <Grid container spacing={2}>
                     {data && data.map((user) =>
                         <Grid item md={4} sm={6} key={user.id}>
-                            <User user={user} />
+                            <User profile={user.profile} />
                         </Grid>
                     )
                     }

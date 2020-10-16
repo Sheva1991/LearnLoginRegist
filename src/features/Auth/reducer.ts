@@ -29,6 +29,7 @@ import { STORAGE } from '../../utils/storage';
 const initialState = {
     user: null,
     token: STORAGE.getItem('token') || null,
+    profile: null,
     loading: false,
     error: null
 } as AuthState;

@@ -14,12 +14,13 @@ export const fetchError = createAction<typeof FETCH_ERROR>(FETCH_ERROR);
 export const fetchResponse = createActionWithPayload<typeof FETCH_RESPONSE, User[]>(FETCH_RESPONSE);
 
 
-export const fetchUsers = (page: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
+export const fetchUsers = (page: number, per_page: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchRequest())
     try {
         const { data } = await API.get<User[]>(`users`, {
             params: {
-                page
+                page,
+                per_page
             }
         });
         dispatch(fetchResponse(data));

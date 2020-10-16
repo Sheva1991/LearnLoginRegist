@@ -1,6 +1,6 @@
-import { User } from '../../types';
+import { Profile } from '../../types';
 
 export type PropsType = {
-    user: User
+    profile: Profile
 }
 

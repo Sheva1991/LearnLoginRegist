@@ -13,6 +13,10 @@ import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/components/PostInfo/PostInfo';
 import AuthRoute from 'components/AuthRoute/AuthRoute';
 import ChangePassword from '../features/Auth/ResetPassword/ResetPassword';
+import Profile from '../features/Account/Profile/Profile';
+import ProfileInfo from 'features/Account/Profile/components/ProfileInfo';
+import ProfileEdit from 'features/Account/Profile/components/ProfileEdit';
+import UserInfo from 'features/Account/Users/components/UserInfo';
 
 export const Routes = () => {
     return (
@@ -41,8 +45,17 @@ export const Routes = () => {
                             <Account>
                                 <Switch>
                                     <Route exact path={ROUTES.account.users} component={Users} />
+                                    <Route exact path={ROUTES.account.userInfo} component={UserInfo} />
                                     <Route exact path={ROUTES.account.posts} component={Posts} />
                                     <Route exact path={ROUTES.account.post} component={PostInfo} />
+                                    <Route path={ROUTES.account.profile}>
+                                        <Profile>
+                                            <Switch>
+                                                <Route exact path={ROUTES.account.profileInfo} component={ProfileInfo} />
+                                                <Route exact path={ROUTES.account.profileEdit} component={ProfileEdit} />
+                                            </Switch>
+                                        </Profile>
+                                    </Route>
                                 </Switch>
                             </Account>
                         </Route>
