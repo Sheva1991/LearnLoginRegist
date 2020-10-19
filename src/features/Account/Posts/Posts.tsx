@@ -1,7 +1,7 @@
 import { CircularProgress, Container, Grid, Typography } from '@material-ui/core';
-import AddPost from 'features/Account/Posts/components/AddPost'
+import AddPost from 'features/Account/Posts/AddPost'
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import Post from './components/Post'
+import Post from './Post'
 import { useStyles } from './styles';
 import Pagination from '@material-ui/lab/Pagination';
 import SimpleModal from 'components/Modal/Modal';

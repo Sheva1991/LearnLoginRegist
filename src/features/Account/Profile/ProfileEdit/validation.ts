@@ -15,7 +15,6 @@ export const validation =
             state: Yup.string().min(3).max(255).required("state is required"),
             city: Yup.string().min(3).max(255).required("city is required"),
         }),
-
     })
 
 

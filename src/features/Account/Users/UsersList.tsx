@@ -1,6 +1,6 @@
 import { Grid, Container, Typography, CircularProgress } from '@material-ui/core';
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import User from './components/User'
+import User from './User'
 import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import { selectData, selectFetching } from './selectors';
 import { useHistory } from 'react-router-dom';
 
 
-const Users = memo(() => {
+const UsersList = memo(() => {
     const [page, setPage] = useState(1)
     const history = useHistory()
     const data = useSelector(selectData)
@@ -53,4 +53,4 @@ const Users = memo(() => {
 }
 )
 
-export default Users
+export default UsersList

@@ -1,4 +1,4 @@
-import { Profile } from '../../types';
+import { Profile } from '../types';
 
 export type PropsType = {
     profile: Profile

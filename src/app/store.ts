@@ -5,15 +5,11 @@ import { STORAGE } from '../utils/storage';
 import API from 'api/api';
 import users from '../features/Account/Users/reducer';
 import posts from '../features/Account/Posts/reducer';
-import userProfile from '../features/Account/Users/components/UserInfo/reducer';
-import profile from '../features/Account/Profile/reducer';
 
 const reducers = combineReducers({
     auth,
-    profile,
     users,
     posts,
-    userProfile
 });
 
 export type RootState = ReturnType<typeof reducers>

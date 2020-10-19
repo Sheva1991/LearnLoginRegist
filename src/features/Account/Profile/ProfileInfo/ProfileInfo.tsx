@@ -3,17 +3,16 @@ import { Box, Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../../Auth/actions';
+import { logout, fetchProfile } from '../../../Auth/actions';
 import { useStyles } from './styles';
 import ProfileCard from 'components/ProfileCard';
-import { selectProfile } from '../../selectors';
-import { fetchProfile } from '../../actions';
+import { selectProfile } from 'features/Auth/selectors';
 
 const ProfileInfo = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const profile = useSelector(selectProfile)
-    console.log(profile);
+
     const handleLogout = useCallback(() => {
         dispatch(logout())
     }, [dispatch])

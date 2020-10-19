@@ -6,7 +6,7 @@ import { useMount } from 'hooks/useMount';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
-import { Post } from '../../types';
+import { Post } from '../types';
 
 
 

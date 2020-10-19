@@ -4,14 +4,16 @@ import { Button, Box } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { validation } from './validation';
 import TextField from 'components/Fields/TextField';
-import { FullProfile } from '../../../../../types/types';
-import { useMount } from '../../../../../hooks/useMount';
+import { FullProfile } from '../../../../types/types';
+import { useMount } from '../../../../hooks/useMount';
 import { editProfile } from './actions';
-import { selectProfile } from '../../selectors';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
 import SelectField from 'components/Fields/SelectField';
 import { useStyles } from './styles';
+import { selectProfile } from 'features/Auth/selectors';
+import { useHistory } from 'react-router-dom';
+import { ROUTES } from '../../../../constants/routes';
 
 
 
@@ -20,11 +22,18 @@ const ProfileEdit: React.FC = memo(() => {
     const classes = useStyles();
     const mountState = useMount()
     const dispatch = useDispatch()
+    const history = useHistory()
     const profile = useSelector(selectProfile)
+    const { id, name, surname, birthday, avatar, phone, address } = { ...profile }
 
     const submit = async (values: FullProfile, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+
         try {
-            await dispatch(editProfile(values))
+            await dispatch(editProfile(values, () => {
+                history.push({
+                    pathname: ROUTES.account.profileInfo
+                })
+            }))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -36,18 +45,14 @@ const ProfileEdit: React.FC = memo(() => {
         <Box className={classes.root} p={4}>
             <Formik
                 initialValues={{
-                    id: profile?.id,
-                    name: profile?.name,
-                    surname: profile?.surname,
-                    birthday: profile?.birthday,
-                    avatar: profile?.avatar,
+                    id, name, surname, birthday, avatar,
                     phone: {
-                        code: profile?.phone.code,
-                        number: profile?.phone.number
+                        code: phone?.code,
+                        number: phone?.number
                     },
                     address: {
-                        state: profile?.address.state,
-                        city: profile?.address.city
+                        state: address?.state,
+                        city: address?.city
                     }
                 }}
                 validationSchema={validation}
@@ -83,8 +88,8 @@ const ProfileEdit: React.FC = memo(() => {
                             <Field
                                 component={TextField}
                                 name="avatar"
+                                type='file'
                                 label="Avatar"
-                                type="file"
                             />
                         </Row>
                         <Row className={classes.phone}>

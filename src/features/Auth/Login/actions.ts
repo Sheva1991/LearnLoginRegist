@@ -1,14 +1,10 @@
 import { Action } from 'redux'
 import { ThunkAction } from "redux-thunk";
-import {
-    LOGIN_ERROR,
-    LOGIN_REQUEST,
-    LOGIN_RESPONSE,
-} from '../constants'
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
 import { LoginValues, ResponseLogin } from './types';
+import { LOGIN_REQUEST, LOGIN_ERROR, LOGIN_RESPONSE } from '../constants';
 
 
 export const loginRequest = createAction<typeof LOGIN_REQUEST>(LOGIN_REQUEST);

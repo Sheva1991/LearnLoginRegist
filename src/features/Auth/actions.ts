@@ -1,13 +1,6 @@
 import { Action } from 'redux'
 import { ThunkAction } from "redux-thunk";
-import {
-    LOGOUT_REQUEST,
-    LOGOUT_ERROR,
-    LOGOUT_RESPONSE,
-    AUTHORIZE_REQUEST,
-    AUTHORIZE_ERROR,
-    AUTHORIZE_RESPONSE
-} from './constants'
+import { AUTHORIZE_REQUEST, AUTHORIZE_ERROR, AUTHORIZE_RESPONSE, LOGOUT_REQUEST, LOGOUT_ERROR, LOGOUT_RESPONSE, FETCH_PROFILE_ERROR, FETCH_PROFILE_REQUEST, FETCH_PROFILE_RESPONSE } from './constants';
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import API from 'api/api';
@@ -18,6 +11,8 @@ import { AuthUser } from './types';
 import { recoveryRequest, recoveryError, recoveryResponse } from './Recovery/actions';
 import { ResponseSuccess } from 'types/types';
 import { resetRequest, resetError, resetResponse } from './ResetPassword/actions';
+import { FullProfile } from '../../types/types';
+import { editProfileError, editProfileRequest, editProfileResponse } from '../Account/Profile/ProfileEdit/actions';
 
 export const authorizeRequest = createAction<typeof AUTHORIZE_REQUEST>(AUTHORIZE_REQUEST);
 export const authorizeError = createAction<typeof AUTHORIZE_ERROR>(AUTHORIZE_ERROR);
@@ -51,6 +46,21 @@ export const logout = (): ThunkAction<void, RootState, unknown, Action<any>> => 
     }
 }
 
+export const fetchProfileRequest = createAction<typeof FETCH_PROFILE_ERROR>(FETCH_PROFILE_ERROR);
+export const fetchProfileError = createAction<typeof FETCH_PROFILE_REQUEST>(FETCH_PROFILE_REQUEST);
+export const fetchProfileResponse = createActionWithPayload<typeof FETCH_PROFILE_RESPONSE, FullProfile>(FETCH_PROFILE_RESPONSE);
+
+
+export const fetchProfile = (): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
+    dispatch(fetchProfileRequest())
+    try {
+        const { data } = await API.get<FullProfile>(`profile`);
+        dispatch(fetchProfileResponse(data));
+    } catch {
+        dispatch(fetchProfileError())
+    }
+}
+
 export type AuthActions =
     | ReturnType<typeof loginRequest>
     | ReturnType<typeof loginError>
@@ -73,3 +83,9 @@ export type AuthActions =
     | ReturnType<typeof resetRequest>
     | ReturnType<typeof resetError>
     | ReturnType<typeof resetResponse>
+    | ReturnType<typeof fetchProfileRequest>
+    | ReturnType<typeof fetchProfileError>
+    | ReturnType<typeof fetchProfileResponse>
+    | ReturnType<typeof editProfileRequest>
+    | ReturnType<typeof editProfileError>
+    | ReturnType<typeof editProfileResponse>

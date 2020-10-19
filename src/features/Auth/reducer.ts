@@ -20,8 +20,14 @@ import {
     RESET_REQUEST,
     RESET_ERROR,
     RESET_RESPONSE,
+    FETCH_PROFILE_ERROR,
+    FETCH_PROFILE_REQUEST,
+    FETCH_PROFILE_RESPONSE,
+    EDIT_PROFILE_ERROR,
+    EDIT_PROFILE_REQUEST,
+    EDIT_PROFILE_RESPONSE
 } from './constants'
-import { AuthState } from "./types";
+import { AuthState, AuthUser } from './types';
 import { AuthActions } from "./actions";
 import { STORAGE } from '../../utils/storage';
 
@@ -29,7 +35,6 @@ import { STORAGE } from '../../utils/storage';
 const initialState = {
     user: null,
     token: STORAGE.getItem('token') || null,
-    profile: null,
     loading: false,
     error: null
 } as AuthState;
@@ -39,7 +44,6 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         case AUTHORIZE_REQUEST: {
             return { ...state, loading: true }
         }
-
         case AUTHORIZE_RESPONSE: {
             const token = STORAGE.getItem('token')
             return {
@@ -139,6 +143,36 @@ const auth = (state: AuthState = initialState, action: AuthActions): AuthState =
         }
         case RESET_ERROR: {
             return { ...state, loading: false }
+        }
+        case FETCH_PROFILE_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case FETCH_PROFILE_ERROR: {
+            return { ...state, loading: false }
+        }
+
+        case FETCH_PROFILE_RESPONSE: {
+            return {
+                ...state,
+                loading: false,
+                user: { ...state.user, profile: action.payload } as AuthUser,
+            }
+        }
+        case EDIT_PROFILE_REQUEST: {
+            return { ...state, loading: true }
+        }
+
+        case EDIT_PROFILE_ERROR: {
+            return { ...state, loading: false }
+        }
+
+        case EDIT_PROFILE_RESPONSE: {
+            return {
+                ...state,
+                loading: false,
+                user: { ...state.user, profile: action.payload } as AuthUser,
+            }
         }
 
 
