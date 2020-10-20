@@ -8,14 +8,15 @@ import Login from 'features/Auth/Login';
 import Recovery from 'features/Auth/Recovery';
 import Registration from 'features/Auth/Registration';
 import Verify from 'features/Auth/Verify';
-import UsersList from 'features/Account/Users';
 import Posts from 'features/Account/Posts';
 import PostInfo from 'features/Account/Posts/PostInfo/PostInfo';
 import AuthRoute from 'components/AuthRoute/AuthRoute';
-import ChangePassword from '../features/Auth/ResetPassword/ResetPassword';
-import Profile from '../features/Account/Profile/Profile';
+import ChangePassword from 'features/Auth/ResetPassword/ResetPassword';
+import Profile from 'features/Account/Profile/Profile';
 import ProfileInfo from 'features/Account/Profile/ProfileInfo';
 import ProfileEdit from 'features/Account/Profile/ProfileEdit';
+import UsersList from 'features/Account/Users/UserList/UsersList';
+import DetailUser from 'features/Account/Users/Details/DetailUser';
 
 export const Routes = () => {
     return (
@@ -44,6 +45,7 @@ export const Routes = () => {
                             <Account>
                                 <Switch>
                                     <Route exact path={ROUTES.account.users} component={UsersList} />
+                                    <Route exact path={ROUTES.account.userDetail} component={DetailUser} />
                                     <Route exact path={ROUTES.account.posts} component={Posts} />
                                     <Route exact path={ROUTES.account.post} component={PostInfo} />
                                     <Route path={ROUTES.account.profile}>

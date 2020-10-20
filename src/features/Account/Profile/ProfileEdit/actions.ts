@@ -6,6 +6,7 @@ import { RootState } from "app/store";
 import API from 'api/api';
 import { FullProfile } from '../../../../types/types';
 import { EDIT_PROFILE_ERROR, EDIT_PROFILE_REQUEST, EDIT_PROFILE_RESPONSE } from '../../../Auth/constants';
+import { getFiniteValue } from '../../../../utils/helpersFunc';
 
 
 
@@ -16,8 +17,14 @@ export const editProfileResponse = createActionWithPayload<typeof EDIT_PROFILE_R
 
 export const editProfile = (values: FullProfile, onSuccess: Function): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(editProfileRequest())
+    const formData = getFiniteValue(values)
+    console.log(formData)
     try {
-        const { data } = await API.put<FullProfile>(`profile`, values);
+        const { data } = await API.post<FullProfile>(`profile`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
         dispatch(editProfileResponse(data));
         onSuccess()
     } catch {

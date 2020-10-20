@@ -1,6 +1,7 @@
 import { Profile } from '../types';
 
 export type PropsType = {
-    profile: Profile
+    profile: Profile,
+    id: number
 }
 

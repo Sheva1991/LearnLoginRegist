@@ -6,7 +6,7 @@ import { useStyles } from './styles';
 
 
 
-const User: React.FC<PropsType> = ({ profile }) => {
+const User: React.FC<PropsType> = ({ profile, id }) => {
     const classes = useStyles()
     return (
         <Card>
@@ -30,7 +30,7 @@ const User: React.FC<PropsType> = ({ profile }) => {
 
             </CardContent>
             <CardActions className={classes.btn}>
-                <Link component={NavLink} to={`/user/profile/${profile.id}`}>
+                <Link component={NavLink} to={`/users/user/${profile.id}`}>
                     <Button color='primary' variant="contained">more info</Button>
                 </Link>
             </CardActions>

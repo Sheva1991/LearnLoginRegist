@@ -15,5 +15,6 @@ export const ROUTES = {
         posts: '/posts',
         post: '/posts/:id?',
         users: '/users',
+        userDetail: '/users/user/:id'
     }
 }

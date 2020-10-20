@@ -3,12 +3,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { STORAGE } from '../utils/storage';
 import API from 'api/api';
-import users from '../features/Account/Users/reducer';
 import posts from '../features/Account/Posts/reducer';
+import users from '../features/Account/Users/UserList/reducer';
+import userDetails from '../features/Account/Users/Details/reducer';
 
 const reducers = combineReducers({
     auth,
     users,
+    userDetails,
     posts,
 });
 

@@ -25,13 +25,16 @@ const ProfileCard: React.FC<PropsType> = ({ profile }) => {
             </Typography>
             <Box width='100%'>
                 <Typography variant="body1" component="p">
-                    Дата рождения: {profile?.birthday}
+                    Дата рождения: {profile?.birthday ? profile?.birthday : `информации пока нет`}
                 </Typography>
                 <Typography variant="body1" component="p">
-                    Телефон: {profile?.phone.code}-{profile?.phone.number}
+                    Телефон: {profile?.phone.code && profile?.phone.number ? `${profile?.phone.code}-${profile?.phone.number}` : 'информации пока нет'}
                 </Typography>
                 <Typography variant="body1" component="p">
-                    Место проживания: область - {profile?.address.state}, город - {profile?.address.city}
+                    Область: {profile?.address.state ? profile?.address.state : 'информации пока нет'}
+                </Typography>
+                <Typography variant="body1" component="p">
+                    Город: {profile?.address.city ? profile?.address.city : 'информации пока нет'}
                 </Typography>
             </Box>
 

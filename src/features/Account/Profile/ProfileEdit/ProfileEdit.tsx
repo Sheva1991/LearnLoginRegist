@@ -14,6 +14,7 @@ import { useStyles } from './styles';
 import { selectProfile } from 'features/Auth/selectors';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../../../constants/routes';
+import UploadFileField from 'components/Fields/UploadFileField';
 
 
 
@@ -45,7 +46,7 @@ const ProfileEdit: React.FC = memo(() => {
         <Box className={classes.root} p={4}>
             <Formik
                 initialValues={{
-                    id, name, surname, birthday, avatar,
+                    id, name, surname, birthday, avatar: avatar || '',
                     phone: {
                         code: phone?.code,
                         number: phone?.number
@@ -86,7 +87,7 @@ const ProfileEdit: React.FC = memo(() => {
                         </Row>
                         <Row>
                             <Field
-                                component={TextField}
+                                component={UploadFileField}
                                 name="avatar"
                                 type='file'
                                 label="Avatar"

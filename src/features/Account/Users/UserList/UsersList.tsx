@@ -1,12 +1,12 @@
 import { Grid, Container, Typography, CircularProgress } from '@material-ui/core';
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import User from './User'
 import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './actions';
 import { selectData, selectFetching } from './selectors';
 import { useHistory } from 'react-router-dom';
+import User from './User/User';
 
 
 const UsersList = memo(() => {
@@ -43,7 +43,7 @@ const UsersList = memo(() => {
                 <Grid container spacing={2}>
                     {data && data.map((user) =>
                         <Grid item md={4} sm={6} key={user.id}>
-                            <User profile={user.profile} />
+                            <User profile={user.profile} id={user.id} />
                         </Grid>
                     )
                     }
