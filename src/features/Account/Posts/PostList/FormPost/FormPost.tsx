@@ -8,19 +8,17 @@ import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
 import { Post } from '../types';
 import { useDispatch } from 'react-redux';
-import { addPost } from './actions';
 import UploadFileField from 'components/Fields/UploadFileField';
+import { PropsType } from './types';
 
 
-
-
-const AddPost: React.FC = memo(() => {
+const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {
     const mountState = useMount()
     const dispatch = useDispatch()
 
     const submit = async (values: Post, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await dispatch(addPost(values))
+            await dispatch(action(values, id))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -30,7 +28,7 @@ const AddPost: React.FC = memo(() => {
 
     return <>
         <Formik
-            initialValues={{}}
+            initialValues={{ ...data }}
             validationSchema={validation}
             onSubmit={submit}
         >
@@ -74,5 +72,5 @@ const AddPost: React.FC = memo(() => {
     </>
 })
 
-export default AddPost
+export default FormPost
 

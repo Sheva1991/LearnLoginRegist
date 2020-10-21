@@ -8,8 +8,8 @@ export interface Post {
 
 export interface PostState {
     data: Post[] | null,
-    links: Links,
-    meta: Meta,
+    links: Links | null,
+    meta: Meta | null,
     fetching: boolean,
     error: boolean,
 }

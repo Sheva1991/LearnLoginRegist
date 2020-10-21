@@ -39,20 +39,23 @@ const UsersList = memo(() => {
             <Typography gutterBottom variant="h3" component="h3">
                 Пользователи
             </Typography>
-            <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} />
+
             {fetching ?
                 <Container className={classes.root}>
                     <CircularProgress />
                 </Container>
                 :
-                <Grid container spacing={2}>
-                    {data && data.map((user) =>
-                        <Grid item md={4} sm={6} key={user.id}>
-                            <User profile={user.profile} postsCount={user.posts_count} id={user.id} />
-                        </Grid>
-                    )
-                    }
-                </Grid>}
+                <>
+                    <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} />
+                    <Grid container spacing={2}>
+                        {data && data.map((user) =>
+                            <Grid item md={4} sm={6} key={user.id}>
+                                <User profile={user.profile} postsCount={user.posts_count} id={user.id} />
+                            </Grid>
+                        )
+                        }
+                    </Grid>
+                </>}
         </Container>
     )
 }

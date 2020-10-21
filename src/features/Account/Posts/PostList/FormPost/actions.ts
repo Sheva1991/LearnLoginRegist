@@ -1,4 +1,4 @@
-import { Post } from './../types';
+import { Post } from '../types';
 import { Action } from 'redux'
 import { ThunkAction } from "redux-thunk";
 import {

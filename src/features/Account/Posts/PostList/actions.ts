@@ -9,7 +9,7 @@ import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
 import { APIBASE } from '../../../../api/api';
 import { ResponsePosts } from './types';
-import { addPostRequest, addPostResponse, addPostError } from './AddPost/actions';
+import { addPostRequest, addPostResponse, addPostError } from './FormPost/actions';
 
 export const fetchRequest = createAction<typeof FETCH_REQUEST>(FETCH_REQUEST);
 export const fetchError = createAction<typeof FETCH_ERROR>(FETCH_ERROR);

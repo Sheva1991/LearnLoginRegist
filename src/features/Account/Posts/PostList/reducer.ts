@@ -12,6 +12,8 @@ import { PostActions } from "./actions";
 
 const initialState = {
     data: null,
+    meta: null,
+    links: null,
     fetching: false,
     error: false,
 } as PostState;
@@ -50,6 +52,8 @@ const posts = (state: PostState = initialState, action: PostActions): PostState 
                 ...state,
                 fetching: false,
                 error: false,
+                //@ts-ignore
+                data: [...state.data, action.payload]
             }
         }
         default:
