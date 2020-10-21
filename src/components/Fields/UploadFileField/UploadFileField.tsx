@@ -15,7 +15,6 @@ const UploadFileField: React.FC<FieldProps> = ({ field, form, }) => {
         onDrop: acceptedFiles => {
             setFileTooLarge(false)
             if (acceptedFiles.length > 0) {
-                console.log(acceptedFiles[0]);
                 form.setFieldValue(field.name, acceptedFiles[0]);
             }
         },

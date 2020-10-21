@@ -12,40 +12,41 @@ import { postDetailsActions } from "./actions";
 
 const initialState = {
     data: null,
-    fetching: false,
+    loading: false,
+    editing: false,
     error: false
 } as PostDetailsState;
 
 const postDetails = (state: PostDetailsState = initialState, action: postDetailsActions): PostDetailsState => {
     switch (action.type) {
         case FETCH_POST_DETAILS_REQUEST: {
-            return { ...state, fetching: true, error: false }
+            return { ...state, loading: true, error: false }
         }
 
         case FETCH_POST_DETAILS_ERROR: {
-            return { ...state, fetching: false, error: true }
+            return { ...state, loading: false, error: true }
         }
 
         case FETCH_POST_DETAILS_RESPONSE: {
             return {
                 ...state,
-                fetching: false,
+                loading: false,
                 error: false,
                 data: action.payload
             }
         }
         case EDIT_POST_DETAILS_REQUEST: {
-            return { ...state, fetching: true, error: false }
+            return { ...state, loading: true, error: false }
         }
 
         case EDIT_POST_DETAILS_ERROR: {
-            return { ...state, fetching: false, error: true }
+            return { ...state, loading: false, error: true }
         }
 
         case EDIT_POST_DETAILS_RESPONSE: {
             return {
                 ...state,
-                fetching: false,
+                loading: false,
                 error: false,
                 data: action.payload
             }

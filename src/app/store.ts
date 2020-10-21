@@ -12,9 +12,9 @@ import postDetails from '../features/Account/Posts/Details/reducer';
 const reducers = combineReducers({
     auth,
     users,
+    posts,
     userDetails,
     postDetails,
-    posts,
 });
 
 export type RootState = ReturnType<typeof reducers>

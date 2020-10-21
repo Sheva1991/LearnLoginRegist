@@ -5,11 +5,10 @@ import { useStyles } from './styles';
 import Pagination from '@material-ui/lab/Pagination';
 import SimpleModal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from './actions';
+import { fetchPosts, addPost } from './actions';
 import { selectData, selectFetching, selectTotalPosts, selectPerPage } from './selectors';
 import { useHistory } from 'react-router-dom';
-import FormPost from 'features/Account/Posts/PostList/FormPost';
-import { addPost } from './FormPost/actions';
+import FormPost from '../components/FormPost';
 
 
 const PostsList = memo(() => {

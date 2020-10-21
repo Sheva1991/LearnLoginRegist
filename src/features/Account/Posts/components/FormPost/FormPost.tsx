@@ -6,10 +6,10 @@ import { useMount } from 'hooks/useMount';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
-import { Post } from '../types';
 import { useDispatch } from 'react-redux';
 import UploadFileField from 'components/Fields/UploadFileField';
 import { PropsType } from './types';
+import { Post } from '../../PostList/types';
 
 
 const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {

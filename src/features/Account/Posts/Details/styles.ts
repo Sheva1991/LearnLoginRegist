@@ -14,5 +14,12 @@ export const useStyles = makeStyles(() =>
             justifyContent: 'flex-end',
             alignItems: 'center',
         },
+        loader: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '50vh'
+        }
     }), { name: 'DetailsPost' }
 );

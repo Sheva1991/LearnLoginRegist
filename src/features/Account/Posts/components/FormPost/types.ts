@@ -1,4 +1,5 @@
-import { Post } from './../types';
+import { Post } from "../../PostList/types";
+
 export interface PropsType {
     action: (data: Post, id?: number) => void,
     data?: Post | null,
