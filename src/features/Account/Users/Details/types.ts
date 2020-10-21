@@ -2,7 +2,15 @@ import { FullProfile } from '../../../../types/types';
 
 
 export interface UserDetailsState {
-    data: FullProfile | null,
+    id: number | null,
+    profile: FullProfile | null,
+    posts_count: number | null,
     fetching: boolean,
     error: boolean
+}
+
+export interface ResponseUserDetails {
+    id: number | null,
+    profile: FullProfile | null,
+    posts_count: number | null,
 }

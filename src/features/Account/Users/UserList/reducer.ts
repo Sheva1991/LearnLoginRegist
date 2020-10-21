@@ -24,11 +24,14 @@ const users = (state: UsersState = initialState, action: UsersActions): UsersSta
         }
 
         case FETCH_RESPONSE: {
+            const { data, meta, links } = action.payload
             return {
                 ...state,
                 fetching: false,
                 error: false,
-                data: action.payload,
+                data,
+                meta,
+                links
             }
         }
         default:

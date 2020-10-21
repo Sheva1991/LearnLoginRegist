@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { useStyles } from './styles';
 
-const UploadFileField: React.FC<FieldProps> = ({ field, form, ...props }) => {
+const UploadFileField: React.FC<FieldProps> = ({ field, form, }) => {
     const classes = useStyles()
     const [isFileTooLarge, setFileTooLarge] = useState(false)
     const [error, setError] = useState('')
@@ -16,7 +16,7 @@ const UploadFileField: React.FC<FieldProps> = ({ field, form, ...props }) => {
             setFileTooLarge(false)
             if (acceptedFiles.length > 0) {
                 console.log(acceptedFiles[0]);
-                form.setFieldValue("avatar", acceptedFiles[0].name);
+                form.setFieldValue(field.name, acceptedFiles[0]);
             }
         },
         multiple: false,
@@ -32,7 +32,6 @@ const UploadFileField: React.FC<FieldProps> = ({ field, form, ...props }) => {
     });
 
 
-
     return (
         <Box width={1} {...getRootProps({ className: "dropzone" })} className={classes.root}>
             <input {...field} value={''} {...getInputProps()} />
@@ -43,7 +42,7 @@ const UploadFileField: React.FC<FieldProps> = ({ field, form, ...props }) => {
                 )}
             {field.value &&
                 <Typography variant="body1" component="p">
-                    ${field.value}
+                    {field.value.name}
                 </Typography>
             }
             {isFileTooLarge && (

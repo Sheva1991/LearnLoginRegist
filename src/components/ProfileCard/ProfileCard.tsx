@@ -17,7 +17,7 @@ const ProfileCard: React.FC<PropsType> = ({ profile }) => {
                 <Avatar variant="square" component={NavLink} to={ROUTES.account.profile} alt={`${profile?.name} ${profile?.surname}`}
                     src={profile?.avatar ? profile?.avatar : ''} className={classes.large} />
                 <Typography variant="h3" component="h2">
-                    {profile?.name} {profile?.surname}
+                    {profile?.name && profile?.surname ? `${profile?.name} ${profile?.surname}` : 'информации пока нет'}
                 </Typography>
             </Box>
             <Typography variant="h5" component="h4">

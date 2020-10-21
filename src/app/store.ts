@@ -3,14 +3,17 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { STORAGE } from '../utils/storage';
 import API from 'api/api';
-import posts from '../features/Account/Posts/reducer';
 import users from '../features/Account/Users/UserList/reducer';
 import userDetails from '../features/Account/Users/Details/reducer';
+import posts from '../features/Account/Posts/PostList/reducer';
+import { APIBASE } from '../api/api';
+import postDetails from '../features/Account/Posts/Details/reducer';
 
 const reducers = combineReducers({
     auth,
     users,
     userDetails,
+    postDetails,
     posts,
 });
 
@@ -28,6 +31,7 @@ store.subscribe(() => {
     const newToken = state.auth.token;
 
     API.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+    APIBASE.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
 
     if (authToken !== newToken) {
         if (newToken !== null) {
@@ -36,6 +40,7 @@ store.subscribe(() => {
             STORAGE.removeItem('token')
         }
         API.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+        APIBASE.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
         authToken = newToken;
     }
 

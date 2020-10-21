@@ -4,7 +4,6 @@ import { Button, Box } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { validation } from './validation';
 import TextField from 'components/Fields/TextField';
-import { FullProfile } from '../../../../types/types';
 import { useMount } from '../../../../hooks/useMount';
 import { editProfile } from './actions';
 import FormBox from 'features/Auth/components/FormBox';
@@ -15,6 +14,7 @@ import { selectProfile } from 'features/Auth/selectors';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../../../constants/routes';
 import UploadFileField from 'components/Fields/UploadFileField';
+import { FullProfileFormValues } from './types';
 
 
 
@@ -25,9 +25,9 @@ const ProfileEdit: React.FC = memo(() => {
     const dispatch = useDispatch()
     const history = useHistory()
     const profile = useSelector(selectProfile)
-    const { id, name, surname, birthday, avatar, phone, address } = { ...profile }
+    const { id, name, surname, birthday, phone, address } = { ...profile }
 
-    const submit = async (values: FullProfile, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+    const submit = async (values: FullProfileFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
 
         try {
             await dispatch(editProfile(values, () => {
@@ -46,7 +46,7 @@ const ProfileEdit: React.FC = memo(() => {
         <Box className={classes.root} p={4}>
             <Formik
                 initialValues={{
-                    id, name, surname, birthday, avatar: avatar || '',
+                    id, name, surname, birthday,
                     phone: {
                         code: phone?.code,
                         number: phone?.number

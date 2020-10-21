@@ -7,19 +7,20 @@ import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
 import { Post } from '../types';
+import { useDispatch } from 'react-redux';
+import { addPost } from './actions';
+import UploadFileField from 'components/Fields/UploadFileField';
 
 
 
 
 const AddPost: React.FC = memo(() => {
     const mountState = useMount()
-    const action = (values: Post) => {
-        console.log('add post')
-    }
+    const dispatch = useDispatch()
 
     const submit = async (values: Post, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
-            await action(values)
+            await dispatch(addPost(values))
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
@@ -39,15 +40,23 @@ const AddPost: React.FC = memo(() => {
                     <Row>
                         <Field
                             component={TextField}
-                            name="title"
+                            name="name"
                             type="text"
                             label="Название"
                         />
                     </Row>
                     <Row>
                         <Field
+                            component={UploadFileField}
+                            name="image"
+                            type='file'
+                            label="Image"
+                        />
+                    </Row>
+                    <Row>
+                        <Field
                             component={TextField}
-                            name="body"
+                            name="text"
                             type="textarea"
                             multiline={true}
                             label="Содержание"

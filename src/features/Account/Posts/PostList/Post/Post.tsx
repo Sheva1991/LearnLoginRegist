@@ -14,7 +14,7 @@ const Post: React.FC<PropsType> = ({ post }) => {
                     Номер статьи: {post.id}.
                 </Typography>
                 <Typography variant="h6" component="p">
-                    Название статьи: {post.title}
+                    Название статьи: {post.name}
                 </Typography>
             </CardContent>
             <CardActions className={classes.btn}>

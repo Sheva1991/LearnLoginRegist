@@ -8,7 +8,9 @@ import { userDetailsActions } from "./actions";
 
 
 const initialState = {
-    data: null,
+    id: null,
+    profile: null,
+    posts_count: null,
     fetching: false,
     error: false
 } as UserDetailsState;
@@ -24,11 +26,16 @@ const userDetails = (state: UserDetailsState = initialState, action: userDetails
         }
 
         case FETCH_USER_DETAILS_RESPONSE: {
+            const {
+                id, profile, posts_count
+            } = action.payload
             return {
                 ...state,
                 fetching: false,
                 error: false,
-                data: action.payload,
+                id,
+                profile,
+                posts_count
             }
         }
         default:

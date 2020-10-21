@@ -7,6 +7,7 @@ import API from 'api/api';
 import { FullProfile } from '../../../../types/types';
 import { EDIT_PROFILE_ERROR, EDIT_PROFILE_REQUEST, EDIT_PROFILE_RESPONSE } from '../../../Auth/constants';
 import { getFiniteValue } from '../../../../utils/helpersFunc';
+import { FullProfileFormValues } from './types';
 
 
 
@@ -15,7 +16,7 @@ export const editProfileError = createAction<typeof EDIT_PROFILE_REQUEST>(EDIT_P
 export const editProfileResponse = createActionWithPayload<typeof EDIT_PROFILE_RESPONSE, FullProfile>(EDIT_PROFILE_RESPONSE);
 
 
-export const editProfile = (values: FullProfile, onSuccess: Function): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
+export const editProfile = (values: FullProfileFormValues, onSuccess: Function): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(editProfileRequest())
     const formData = getFiniteValue(values)
     console.log(formData)

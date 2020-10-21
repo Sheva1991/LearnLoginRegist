@@ -1,26 +1,21 @@
-export interface User {
-    id: number,
-    profile: Profile,
-    posts_count: number
+export interface Post {
+    id?: number,
+    image?: string,
+    name?: string,
+    text?: string,
+    created_at?: string
 }
 
-export interface UsersState {
-    data: User[] | null,
-    meta: Meta | null,
-    links: Links | null,
+export interface PostState {
+    data: Post[] | null,
+    links: Links,
+    meta: Meta,
     fetching: boolean,
-    error: boolean
+    error: boolean,
 }
 
-export interface Profile {
-    id: number,
-    name: string | null,
-    surname: string | null,
-    avatar: string | null
-}
-
-export interface ResponseUsers {
-    data: User[] | null,
+export interface ResponsePosts {
+    data: Post[] | null,
     links: Links,
     meta: Meta
 }
@@ -47,5 +42,4 @@ export interface LinkDatail {
     label: string,
     active: boolean
 }
-
 
