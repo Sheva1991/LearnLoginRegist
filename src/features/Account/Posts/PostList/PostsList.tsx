@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid, Typography } from '@material-ui/core';
+import { Box, CircularProgress, Container, Grid, Typography } from '@material-ui/core';
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import Post from './Post'
 import { useStyles } from './styles';
@@ -47,19 +47,21 @@ const PostsList = memo(() => {
                 </Container>
                 :
                 <>
-                    <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} />
-                    <Grid container spacing={2}>
-                        {data && data.length > 0 ? data.map((post) =>
-                            <Grid item md={4} sm={6} key={post.id}>
-                                <Post post={post} />
-                            </Grid>
-                        )
-                            :
-                            <Typography gutterBottom variant="h4" component="h4">
-                                Постов пока нет
-                            </Typography>
-                        }
-                    </Grid>
+                    {totalPages > 1 ? <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} /> : null}
+                    <Box mt={4}>
+                        <Grid container spacing={2}>
+                            {data && data.length > 0 ? data.map((post) =>
+                                <Grid item md={4} sm={6} key={post.id}>
+                                    <Post post={post} />
+                                </Grid>
+                            )
+                                :
+                                <Typography gutterBottom variant="h4" component="h4">
+                                    Постов пока нет
+                                </Typography>
+                            }
+                        </Grid>
+                    </Box>
                 </>
             }
         </Container>

@@ -1,4 +1,4 @@
-import { Grid, Container, Typography, CircularProgress } from '@material-ui/core';
+import { Grid, Container, Typography, CircularProgress, Box } from '@material-ui/core';
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
@@ -42,15 +42,17 @@ const UsersList = memo(() => {
                 </Container>
                 :
                 <>
-                    <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} />
-                    <Grid container spacing={2}>
-                        {data && data.map((user) =>
-                            <Grid item md={4} sm={6} key={user.id}>
-                                <User profile={user.profile} postsCount={user.posts_count} id={user.id} />
-                            </Grid>
-                        )
-                        }
-                    </Grid>
+                    {totalPages > 1 ? <Pagination className={classes.pagination} count={totalPages} color="primary" page={page} onChange={handleChange} /> : null}
+                    <Box mt={4}>
+                        <Grid container spacing={2}>
+                            {data && data.map((user) =>
+                                <Grid item md={4} sm={6} key={user.id}>
+                                    <User profile={user.profile} postsCount={user.posts_count} id={user.id} />
+                                </Grid>
+                            )
+                            }
+                        </Grid>
+                    </Box>
                 </>}
         </Container>
     )
