@@ -19,9 +19,8 @@ export const editProfileResponse = createActionWithPayload<typeof EDIT_PROFILE_R
 export const editProfile = (values: FullProfileFormValues, onSuccess: Function): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(editProfileRequest())
     const formData = getFiniteValue(values)
-    console.log(formData)
     try {
-        const { data } = await API.post<FullProfile>(`profile`, formData, {
+        const { data: { data } } = await API.post<{ data: FullProfile }>(`profile`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

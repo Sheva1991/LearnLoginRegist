@@ -11,7 +11,6 @@ export const ROUTES = {
         main: '/',
         profile: '/profile',
         profileInfo: '/profile/info',
-        profileEdit: '/profile/edit',
         posts: '/posts',
         post: '/posts/:id?',
         users: '/users',

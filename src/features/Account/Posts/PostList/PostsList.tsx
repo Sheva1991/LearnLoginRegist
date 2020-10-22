@@ -6,7 +6,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import SimpleModal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, addPost } from './actions';
-import { selectData, selectFetching, selectTotalPosts, selectPerPage } from './selectors';
+import { selectData, selectFetching, selectTotalPages } from './selectors';
 import { useHistory } from 'react-router-dom';
 import FormPost from '../components/FormPost';
 
@@ -15,14 +15,10 @@ const PostsList = memo(() => {
     const [page, setPage] = useState(1)
     const history = useHistory()
     const data = useSelector(selectData)
-    const total = useSelector(selectTotalPosts)
-    const perPage = useSelector(selectPerPage)
+    const totalPages = useSelector(selectTotalPages)
     const fetching = useSelector(selectFetching)
     const classes = useStyles();
     const dispatch = useDispatch()
-    const totalSize = total ? total : 1
-    const perPageSize = perPage ? perPage : 1
-    const totalPages = Math.ceil(totalSize / perPageSize)
 
     const handleChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
@@ -30,7 +26,7 @@ const PostsList = memo(() => {
 
     useEffect(() => {
         dispatch(fetchPosts(page, 6))
-        history.push({
+        history.replace({
             pathname: '/posts',
             search: `page=${page}`
         })

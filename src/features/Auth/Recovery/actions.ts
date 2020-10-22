@@ -19,7 +19,7 @@ export const recoveryResponse = createAction<typeof RECOVERY_RESPONSE>(RECOVERY_
 export const recovery = (values: RecoveryValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(recoveryRequest())
     try {
-        const { data } = await API.post<ResponseSuccess>(`auth/password-recovery`, values);
+        const { data: { data } } = await API.post<{ data: ResponseSuccess }>(`auth/password-recovery`, values);
         if (data.success) {
             dispatch(recoveryResponse());
         } else {

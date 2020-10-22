@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Field, Formik } from 'formik';
+import { Field, Formik, FieldProps } from 'formik';
 import { Button, Box } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { validation } from './validation';
@@ -25,7 +25,7 @@ const ProfileEdit: React.FC = memo(() => {
     const dispatch = useDispatch()
     const history = useHistory()
     const profile = useSelector(selectProfile)
-    const { id, name, surname, birthday, phone, address } = { ...profile }
+    const { id, name, surname, birthday, phone, avatar, address } = { ...profile }
 
     const submit = async (values: FullProfileFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
 
@@ -63,6 +63,16 @@ const ProfileEdit: React.FC = memo(() => {
                     <FormBox>
                         <Row>
                             <Field
+                                name="avatar"
+                                type='file'
+                                label="Avatar"
+                            >
+                                {({ field, form, meta }: FieldProps) => <UploadFileField field={field} form={form} meta={meta}
+                                    multiple={false} accept="image/jpeg, image/png" maxSize={1048576} />}
+                            </Field>
+                        </Row>
+                        <Row>
+                            <Field
                                 component={TextField}
                                 name="name"
                                 type="text"
@@ -83,14 +93,6 @@ const ProfileEdit: React.FC = memo(() => {
                                 name="birthday"
                                 label="Birthday"
                                 type="date"
-                            />
-                        </Row>
-                        <Row>
-                            <Field
-                                component={UploadFileField}
-                                name="avatar"
-                                type='file'
-                                label="Avatar"
                             />
                         </Row>
                         <Row className={classes.phone}>

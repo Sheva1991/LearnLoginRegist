@@ -19,7 +19,7 @@ export const resetResponse = createAction<typeof RESET_RESPONSE>(RESET_RESPONSE)
 export const resetPassword = (values: ResetPasswordValues): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(resetRequest())
     try {
-        const { data } = await API.post<ResponseSuccess>(`auth/password-reset`, values);
+        const { data: { data } } = await API.post<{ data: ResponseSuccess }>(`auth/password-reset`, values);
         if (data.success) {
             dispatch(resetResponse());
         } else {

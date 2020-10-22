@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Field, Formik } from 'formik';
+import { Field, Formik, FieldProps } from 'formik';
 import { Box, Button } from '@material-ui/core';
 import { validation } from './validation';
 import { useMount } from 'hooks/useMount';
@@ -45,11 +45,13 @@ const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {
                     </Row>
                     <Row>
                         <Field
-                            component={UploadFileField}
                             name="image"
                             type='file'
                             label="Image"
-                        />
+                        >
+                            {({ field, form, meta }: FieldProps) => <UploadFileField field={field} form={form} meta={meta}
+                                multiple={true} accept="image/jpeg, image/png" maxSize={1048576 * 2} />}
+                        </Field>
                     </Row>
                     <Row>
                         <Field

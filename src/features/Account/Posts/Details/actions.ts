@@ -24,7 +24,7 @@ export const editPostResponse = createActionWithPayload<typeof EDIT_POST_DETAILS
 export const fetchPostDetails = (id: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchPostDetailsRequest())
     try {
-        const { data } = await API.get<Post>(`posts/${id}`);
+        const { data: { data } } = await API.get<{ data: Post }>(`posts/${id}`);
         dispatch(fetchPostDetailsResponse(data));
     } catch {
         dispatch(fetchPostDetailsError())
@@ -34,7 +34,7 @@ export const editPost = (values: Post, id?: number): ThunkAction<void, RootState
     dispatch(editPostRequest())
     const formData = getFiniteValue(values)
     try {
-        const { data } = await API.post<Post>(`posts/${id}`, formData, {
+        const { data: { data } } = await API.post<{ data: Post }>(`posts/${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

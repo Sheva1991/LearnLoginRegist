@@ -12,7 +12,6 @@ import AuthRoute from 'components/AuthRoute/AuthRoute';
 import ChangePassword from 'features/Auth/ResetPassword/ResetPassword';
 import Profile from 'features/Account/Profile/Profile';
 import ProfileInfo from 'features/Account/Profile/ProfileInfo';
-import ProfileEdit from 'features/Account/Profile/ProfileEdit';
 import UsersList from 'features/Account/Users/UserList/UsersList';
 import DetailUser from 'features/Account/Users/Details/DetailUser';
 import PostsList from 'features/Account/Posts/PostList';
@@ -52,7 +51,6 @@ export const Routes = () => {
                                         <Profile>
                                             <Switch>
                                                 <Route exact path={ROUTES.account.profileInfo} component={ProfileInfo} />
-                                                <Route exact path={ROUTES.account.profileEdit} component={ProfileEdit} />
                                             </Switch>
                                         </Profile>
                                     </Route>

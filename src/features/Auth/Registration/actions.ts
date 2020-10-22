@@ -19,7 +19,7 @@ export const registrateResponse = createActionWithPayload<typeof REGISTRATE_RESP
 export const registrate = (values: RegistrateValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(registrateRequest())
     try {
-        const { data } = await API.post<ResponseLogin>(`auth/register`, values);
+        const { data: { data } } = await API.post<{ data: ResponseLogin }>(`auth/register`, values);
         dispatch(registrateResponse(data));
     } catch (e) {
         dispatch(registrateError())

@@ -10,7 +10,6 @@ import {
 } from './constants'
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
-import { APIBASE } from '../../../../api/api';
 import { ResponsePosts, Post } from './types';
 import { getFiniteValue } from '../../../../utils/helpersFunc';
 import API from 'api/api';
@@ -28,7 +27,7 @@ export const addPostResponse = createActionWithPayload<typeof ADD_POST_RESPONSE,
 export const fetchPosts = (page: number, per_page: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchRequest())
     try {
-        const { data } = await APIBASE.get<ResponsePosts>(`posts`, {
+        const { data } = await API.get<ResponsePosts>(`posts`, {
             params: {
                 page,
                 per_page
@@ -44,7 +43,7 @@ export const addPost = (values: Post): ThunkAction<void, RootState, unknown, Act
     dispatch(addPostRequest())
     const formData = getFiniteValue(values)
     try {
-        const { data } = await API.post<Post>(`posts`, formData, {
+        const { data: { data } } = await API.post<{ data: Post }>(`posts`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -17,7 +17,7 @@ export const fetchUserDetailsResponse = createActionWithPayload<typeof FETCH_USE
 export const fetchUserDetails = (id: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchUserDetailsRequest())
     try {
-        const { data } = await API.get<ResponseUserDetails>(`users/${id}`);
+        const { data: { data } } = await API.get<{ data: ResponseUserDetails }>(`users/${id}`);
         dispatch(fetchUserDetailsResponse(data));
     } catch {
         dispatch(fetchUserDetailsError())

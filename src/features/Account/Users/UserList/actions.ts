@@ -8,7 +8,7 @@ import {
 import { ResponseUsers } from './types';
 import { createAction, createActionWithPayload } from "utils/redux";
 import { RootState } from "app/store";
-import { APIBASE } from '../../../../api/api';
+import API from 'api/api';
 export const fetchRequest = createAction<typeof FETCH_REQUEST>(FETCH_REQUEST);
 export const fetchError = createAction<typeof FETCH_ERROR>(FETCH_ERROR);
 export const fetchResponse = createActionWithPayload<typeof FETCH_RESPONSE, ResponseUsers>(FETCH_RESPONSE);
@@ -17,7 +17,7 @@ export const fetchResponse = createActionWithPayload<typeof FETCH_RESPONSE, Resp
 export const fetchUsers = (page: number, per_page: number): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchRequest())
     try {
-        const { data } = await APIBASE.get<ResponseUsers>(`users`, {
+        const { data } = await API.get<ResponseUsers>(`users`, {
             params: {
                 page,
                 per_page

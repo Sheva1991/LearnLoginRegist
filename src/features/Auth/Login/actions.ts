@@ -15,7 +15,7 @@ export const loginResponse = createActionWithPayload<typeof LOGIN_RESPONSE, Resp
 export const login = (values: LoginValues): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(loginRequest())
     try {
-        const { data } = await API.post<ResponseLogin>(`auth/login`, values);
+        const { data: { data } } = await API.post<{ data: ResponseLogin }>(`auth/login`, values);
         dispatch(loginResponse(data));
         localStorage.setItem('token', data.token)
     } catch {

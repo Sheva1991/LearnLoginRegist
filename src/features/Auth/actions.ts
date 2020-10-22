@@ -25,7 +25,7 @@ export const logoutResponse = createAction<typeof LOGOUT_RESPONSE>(LOGOUT_RESPON
 export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(authorizeRequest())
     try {
-        const { data } = await API.get<AuthUser>(`auth/authorize`);
+        const { data: { data } } = await API.get<{ data: AuthUser }>(`auth/authorize`);
         dispatch(authorizeResponse(data));
     } catch {
         dispatch(authorizeError())
@@ -35,7 +35,7 @@ export const authorize = (): ThunkAction<void, RootState, unknown, Action<any>> 
 export const logout = (): ThunkAction<void, RootState, unknown, Action<any>> => async (dispatch) => {
     dispatch(logoutRequest())
     try {
-        const { data } = await API.get<ResponseSuccess>(`auth/logout`);
+        const { data: { data } } = await API.get<{ data: ResponseSuccess }>(`auth/logout`);
         if (data.success) {
             dispatch(logoutResponse());
         } else {
@@ -54,7 +54,7 @@ export const fetchProfileResponse = createActionWithPayload<typeof FETCH_PROFILE
 export const fetchProfile = (): ThunkAction<void, RootState, unknown, Action<any>> => async dispatch => {
     dispatch(fetchProfileRequest())
     try {
-        const { data } = await API.get<FullProfile>(`profile`);
+        const { data: { data } } = await API.get<{ data: FullProfile }>(`profile`);
         dispatch(fetchProfileResponse(data));
     } catch {
         dispatch(fetchProfileError())

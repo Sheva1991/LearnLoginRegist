@@ -1,8 +1,6 @@
 import React from 'react'
 import { useStyles } from './styles';
 import { Container, Typography, Box, Avatar } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../constants/routes';
 import { PropsType } from './types';
 
 
@@ -14,7 +12,7 @@ const ProfileCard: React.FC<PropsType> = ({ profile }) => {
                 Профиль
             </Typography>
             <Box width='100%' my={4} className={classes.box}>
-                <Avatar variant="square" component={NavLink} to={ROUTES.account.profile} alt={`${profile?.name} ${profile?.surname}`}
+                <Avatar variant="square" alt={`${profile?.name} ${profile?.surname}`}
                     src={profile?.avatar ? profile?.avatar : ''} className={classes.large} />
                 <Typography variant="h3" component="h2">
                     {profile?.name && profile?.surname ? `${profile?.name} ${profile?.surname}` : 'информации пока нет'}

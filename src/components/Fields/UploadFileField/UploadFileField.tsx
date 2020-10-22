@@ -1,52 +1,58 @@
 import { FieldProps } from 'formik'
-import React, { useState } from 'react'
-import { Typography, Box } from '@material-ui/core';
+import React from 'react'
+import { Typography, Box, Avatar } from '@material-ui/core';
 import { useDropzone } from 'react-dropzone';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { useStyles } from './styles';
+import { PropsType } from './types';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-const UploadFileField: React.FC<FieldProps> = ({ field, form, }) => {
+const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, accept, multiple, maxSize = 1048576 }) => {
     const classes = useStyles()
-    const [isFileTooLarge, setFileTooLarge] = useState(false)
-    const [error, setError] = useState('')
+
+    const deleteValueFromField = () => {
+        form.setFieldValue(field.name, '');
+    }
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: "image/jpeg, image/png",
+        accept: accept,
         onDrop: acceptedFiles => {
-            setFileTooLarge(false)
             if (acceptedFiles.length > 0) {
                 form.setFieldValue(field.name, acceptedFiles[0]);
             }
         },
-        multiple: false,
+        multiple: multiple,
         maxFiles: 1,
-        maxSize: 1048576,
+        maxSize: maxSize,
         onDropRejected: rejectedFiles => {
             if (rejectedFiles.length > 0) {
-                setFileTooLarge(true)
-                setError(rejectedFiles[0].errors[0].message)
+                form.setFieldError(field.name, rejectedFiles[0].errors[0].message)
             }
 
-        }
+        },
     });
 
 
     return (
-        <Box width={1} {...getRootProps({ className: "dropzone" })} className={classes.root}>
+        <Box width={1} {...getRootProps()} className={classes.root}>
             <input {...field} value={''} {...getInputProps()} />
             {isDragActive ? (
                 <p>Drop the files here ...</p>
             ) : (
-                    <AddAPhotoIcon className={classes.icon} />
+
+
+                    field.value ?
+                        <>
+                            <Avatar alt={`${field.name}-preview`} className={classes.large}
+                                src={URL.createObjectURL(field.value)} />
+                            <HighlightOffIcon onClick={deleteValueFromField} className={classes.delete} />
+                        </>
+                        : <AddAPhotoIcon className={classes.icon} />
+
                 )}
-            {field.value &&
-                <Typography variant="body1" component="p">
-                    {field.value.name}
-                </Typography>
-            }
-            {isFileTooLarge && (
+            {meta.error && (
                 <Typography variant="body1" color='secondary' component="p">
-                    {error}
+                    {meta.error}
                 </Typography>
             )}
         </Box>
