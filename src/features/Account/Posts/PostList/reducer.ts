@@ -12,8 +12,10 @@ import { PostActions } from "./actions";
 
 const initialState = {
     data: null,
-    meta: null,
-    links: null,
+    pagination: {
+        per_page: 6,
+        total: 0,
+    },
     fetching: false,
     error: false,
 } as PostState;
@@ -29,14 +31,16 @@ const posts = (state: PostState = initialState, action: PostActions): PostState 
         }
 
         case FETCH_RESPONSE: {
-            const { data, meta, links } = action.payload
+            const { data, meta } = action.payload
             return {
                 ...state,
                 fetching: false,
                 error: false,
                 data,
-                meta,
-                links
+                pagination: {
+                    per_page: meta.per_page,
+                    total: meta.total
+                }
             }
         }
         case ADD_POST_REQUEST: {

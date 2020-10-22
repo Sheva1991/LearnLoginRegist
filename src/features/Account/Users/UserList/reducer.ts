@@ -9,6 +9,10 @@ import { UsersActions } from "./actions";
 
 const initialState = {
     data: null,
+    pagination: {
+        per_page: 6,
+        total: 0,
+    },
     fetching: false,
     error: false
 } as UsersState;
@@ -24,14 +28,16 @@ const users = (state: UsersState = initialState, action: UsersActions): UsersSta
         }
 
         case FETCH_RESPONSE: {
-            const { data, meta, links } = action.payload
+            const { data, meta } = action.payload
             return {
                 ...state,
                 fetching: false,
                 error: false,
                 data,
-                meta,
-                links
+                pagination: {
+                    per_page: meta.per_page,
+                    total: meta.total
+                }
             }
         }
         default:

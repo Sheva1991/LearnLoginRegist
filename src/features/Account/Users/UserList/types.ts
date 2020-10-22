@@ -6,8 +6,10 @@ export interface User {
 
 export interface UsersState {
     data: User[] | null,
-    meta: Meta | null,
-    links: Links | null,
+    pagination: {
+        per_page: number,
+        total: number,
+    }
     fetching: boolean,
     error: boolean
 }

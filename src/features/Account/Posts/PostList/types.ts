@@ -8,8 +8,10 @@ export interface Post {
 
 export interface PostState {
     data: Post[] | null,
-    links: Links | null,
-    meta: Meta | null,
+    pagination: {
+        per_page: number,
+        total: number,
+    }
     fetching: boolean,
     error: boolean,
 }
