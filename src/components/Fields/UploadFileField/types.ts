@@ -1,5 +1,5 @@
 export interface PropsType {
     accept: string,
-    multiple: boolean,
-    maxSize: number
+    multiple?: boolean,
+    maxSize?: number
 }

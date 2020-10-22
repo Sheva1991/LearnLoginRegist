@@ -7,10 +7,11 @@ import { useStyles } from './styles';
 import { PropsType } from './types';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, accept, multiple, maxSize = 1048576 }) => {
+const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, accept, multiple = false, maxSize = 1048576 }) => {
     const classes = useStyles()
 
-    const deleteValueFromField = () => {
+    const deleteValueFromField = (e: React.SyntheticEvent) => {
+        e.stopPropagation()
         form.setFieldValue(field.name, '');
     }
 
@@ -28,7 +29,6 @@ const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, 
             if (rejectedFiles.length > 0) {
                 form.setFieldError(field.name, rejectedFiles[0].errors[0].message)
             }
-
         },
     });
 
@@ -39,15 +39,13 @@ const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, 
             {isDragActive ? (
                 <p>Drop the files here ...</p>
             ) : (
-
-
                     field.value ?
                         <>
                             <Avatar alt={`${field.name}-preview`} className={classes.large}
                                 src={URL.createObjectURL(field.value)} />
-                            <HighlightOffIcon onClick={deleteValueFromField} className={classes.delete} />
+                            <HighlightOffIcon onClick={deleteValueFromField} className={classes.deleteIcon} />
                         </>
-                        : <AddAPhotoIcon className={classes.icon} />
+                        : <AddAPhotoIcon />
 
                 )}
             {meta.error && (
