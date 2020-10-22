@@ -7,13 +7,11 @@ import SimpleModal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, addPost } from './actions';
 import { selectData, selectFetching, selectTotalPages } from './selectors';
-import { useHistory } from 'react-router-dom';
 import FormPost from '../components/FormPost';
 
 
 const PostsList = memo(() => {
     const [page, setPage] = useState(1)
-    const history = useHistory()
     const data = useSelector(selectData)
     const totalPages = useSelector(selectTotalPages)
     const fetching = useSelector(selectFetching)
@@ -26,11 +24,7 @@ const PostsList = memo(() => {
 
     useEffect(() => {
         dispatch(fetchPosts(page, 6))
-        history.replace({
-            pathname: '/posts',
-            search: `page=${page}`
-        })
-    }, [dispatch, history, page])
+    }, [dispatch, page])
 
     return (
         <Container className={classes.root}>

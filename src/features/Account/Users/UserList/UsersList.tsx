@@ -5,13 +5,11 @@ import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './actions';
 import { selectData, selectFetching, selectTotalPages } from './selectors';
-import { useHistory } from 'react-router-dom';
 import User from './User/User';
 
 
 const UsersList = memo(() => {
     const [page, setPage] = useState(1)
-    const history = useHistory()
     const data = useSelector(selectData)
     const totalPages = useSelector(selectTotalPages)
     const fetching = useSelector(selectFetching)
@@ -24,11 +22,7 @@ const UsersList = memo(() => {
 
     useEffect(() => {
         dispatch(fetchUsers(page, 6))
-        history.replace({
-            pathname: '/users',
-            search: `page=${page}`
-        })
-    }, [dispatch, history, page])
+    }, [dispatch, page])
 
     return (
         <Container className={classes.root}>
