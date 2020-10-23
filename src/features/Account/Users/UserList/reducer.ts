@@ -12,6 +12,7 @@ const initialState = {
     pagination: {
         per_page: 6,
         total: 0,
+        currentPage: 1
     },
     fetching: false,
     error: false
@@ -36,7 +37,8 @@ const users = (state: UsersState = initialState, action: UsersActions): UsersSta
                 data,
                 pagination: {
                     per_page: meta.per_page,
-                    total: meta.total
+                    total: meta.total,
+                    currentPage: meta.current_page
                 }
             }
         }

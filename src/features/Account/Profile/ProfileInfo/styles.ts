@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         buttons: {
             display: 'flex',
-            justifyContent: 'flex-end',
+            alignSelf: 'flex-end'
         }
     }), { name: 'ProfileInfo' }
 );

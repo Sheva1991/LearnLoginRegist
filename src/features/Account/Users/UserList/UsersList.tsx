@@ -4,15 +4,17 @@ import Pagination from '@material-ui/lab/Pagination';
 import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './actions';
-import { selectData, selectFetching, selectTotalPages } from './selectors';
+import { selectData, selectFetching, selectTotalPages, selectPerPage, selectCurrentPage } from './selectors';
 import User from './User/User';
 
 
 const UsersList = memo(() => {
-    const [page, setPage] = useState(1)
     const data = useSelector(selectData)
     const totalPages = useSelector(selectTotalPages)
+    const perPage = useSelector(selectPerPage)
+    const currentPage = useSelector(selectCurrentPage)
     const fetching = useSelector(selectFetching)
+    const [page, setPage] = useState(currentPage)
     const classes = useStyles();
     const dispatch = useDispatch()
 
@@ -21,8 +23,8 @@ const UsersList = memo(() => {
     }, []);
 
     useEffect(() => {
-        dispatch(fetchUsers(page, 6))
-    }, [dispatch, page])
+        dispatch(fetchUsers(page, perPage))
+    }, [dispatch, page, perPage])
 
     return (
         <Container className={classes.root}>

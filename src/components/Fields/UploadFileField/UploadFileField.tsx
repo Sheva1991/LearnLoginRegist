@@ -1,5 +1,5 @@
 import { FieldProps } from 'formik'
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Typography, Box, Avatar } from '@material-ui/core';
 import { useDropzone } from 'react-dropzone';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
@@ -7,12 +7,14 @@ import { useStyles } from './styles';
 import { PropsType } from './types';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, accept, multiple = false, maxSize = 1048576 }) => {
+const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, prevImage, form, meta, accept, maxSize = 1048576 }) => {
     const classes = useStyles()
+    const [prevPreview, setPrevPreview] = useState(prevImage)
 
     const deleteValueFromField = (e: React.SyntheticEvent) => {
         e.stopPropagation()
-        form.setFieldValue(field.name, '');
+        form.setFieldValue(field.name, null);
+        setPrevPreview(null)
     }
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -22,7 +24,7 @@ const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, 
                 form.setFieldValue(field.name, acceptedFiles[0]);
             }
         },
-        multiple: multiple,
+        multiple: false,
         maxFiles: 1,
         maxSize: maxSize,
         onDropRejected: rejectedFiles => {
@@ -32,6 +34,19 @@ const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, 
         },
     });
 
+    const preview = useMemo(
+        () => field.value && URL.createObjectURL(field.value),
+        [field.value]
+    )
+
+    useEffect(() => {
+        return () => {
+            if (preview) {
+                URL.revokeObjectURL(preview)
+            }
+        }
+    }, [preview])
+
 
     return (
         <Box width={1} {...getRootProps()} className={classes.root}>
@@ -39,10 +54,10 @@ const UploadFileField: React.FC<FieldProps & PropsType> = ({ field, form, meta, 
             {isDragActive ? (
                 <p>Drop the files here ...</p>
             ) : (
-                    field.value ?
+                    field.value || prevPreview ?
                         <>
                             <Avatar alt={`${field.name}-preview`} className={classes.large}
-                                src={URL.createObjectURL(field.value)} />
+                                src={preview ? preview : prevPreview ? prevPreview : ''} />
                             <HighlightOffIcon onClick={deleteValueFromField} className={classes.deleteIcon} />
                         </>
                         : <AddAPhotoIcon />

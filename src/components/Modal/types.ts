@@ -1,4 +1,5 @@
 export interface PropsType {
-    btnTitle: string,
-    children: React.ReactElement
+    children: React.ReactElement,
+    modalClose: (value: boolean) => void
+    opened: boolean
 }

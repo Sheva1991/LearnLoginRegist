@@ -7,10 +7,10 @@ export interface AuthState {
 }
 
 export interface AuthUser {
-    id: number | null,
+    id: number,
     email: string,
     verified: boolean,
-    profile: FullProfile | null
+    profile: FullProfile
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Typography, CardMedia, Box, Container, CircularProgress } from '@material-ui/core';
+import { Card, CardContent, Typography, CardMedia, Box, Container, CircularProgress, Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostDetails, editPost } from './actions';
@@ -7,6 +7,7 @@ import { selectLoading, selectPost } from './selectors';
 import { useStyles } from './styles';
 import SimpleModal from 'components/Modal/Modal';
 import FormPost from '../components/FormPost';
+import { useModal } from 'hooks/useModal';
 
 
 const DetailsPost = () => {
@@ -14,6 +15,7 @@ const DetailsPost = () => {
     const dispatch = useDispatch()
     const post = useSelector(selectPost)
     const loading = useSelector(selectLoading)
+    const { opened, Open, Close } = useModal()
     const params = useParams<{ id: string }>();
     const id = +params.id
 
@@ -46,8 +48,11 @@ const DetailsPost = () => {
                                     Содержание: {post?.text}
                                 </Typography>
                             </Box>
-                            <SimpleModal btnTitle='Edit post'>
-                                <FormPost action={editPost} id={id} data={post} />
+                            <Button color='primary' variant="contained" type="button" onClick={Open}>
+                                Edit post
+                            </Button>
+                            <SimpleModal opened={opened} modalClose={Close}>
+                                <FormPost action={editPost} id={id} data={post} modalClose={Close} />
                             </SimpleModal>
                         </CardContent>
                     </Card>

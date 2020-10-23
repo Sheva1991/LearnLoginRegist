@@ -12,7 +12,7 @@ import { PropsType } from './types';
 import { Post } from '../../PostList/types';
 
 
-const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {
+const FormPost: React.FC<PropsType> = memo(({ action, id, data, modalClose }) => {
     const mountState = useMount()
     const dispatch = useDispatch()
 
@@ -22,6 +22,7 @@ const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
+                modalClose && modalClose(true)
             }
         }
     }
@@ -50,7 +51,7 @@ const FormPost: React.FC<PropsType> = memo(({ action, id, data }) => {
                             label="Image"
                         >
                             {({ field, form, meta }: FieldProps) => <UploadFileField field={field} form={form} meta={meta}
-                                multiple={true} accept="image/jpeg, image/png" maxSize={1048576 * 2} />}
+                                accept="image/jpeg, image/png, image/svg" maxSize={1048576 * 2} />}
                         </Field>
                     </Row>
                     <Row>

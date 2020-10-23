@@ -3,17 +3,17 @@ export interface ResponseSuccess {
 }
 
 export interface FullProfile {
-    id?: number
-    name?: string | null
-    surname?: string | null
-    birthday?: string | null
-    avatar?: string | null
+    id: number
+    name: string | null
+    surname: string | null
+    birthday: string | null
+    avatar: string | null
     phone: {
-        code?: number | null,
-        number?: number | null
+        code: number | null,
+        number: number | null
     }
     address: {
-        state?: string | null,
-        city?: string | null
+        state: string | null,
+        city: string | null
     }
 }

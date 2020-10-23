@@ -14,21 +14,19 @@ import { selectProfile } from 'features/Auth/selectors';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../../../constants/routes';
 import UploadFileField from 'components/Fields/UploadFileField';
-import { FullProfileFormValues } from './types';
+import { FullProfileFormValues, PropsType } from './types';
 
 
 
 
-const ProfileEdit: React.FC = memo(() => {
+const ProfileEdit: React.FC<PropsType> = memo(({ modalClose }) => {
     const classes = useStyles();
     const mountState = useMount()
     const dispatch = useDispatch()
     const history = useHistory()
-    const profile = useSelector(selectProfile)
-    const { id, name, surname, birthday, phone, avatar, address } = { ...profile }
+    const { avatar, ...profile } = useSelector(selectProfile) || {}
 
     const submit = async (values: FullProfileFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
-
         try {
             await dispatch(editProfile(values, () => {
                 history.push({
@@ -38,6 +36,7 @@ const ProfileEdit: React.FC = memo(() => {
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
+                modalClose && modalClose(true)
             }
         }
     }
@@ -45,17 +44,7 @@ const ProfileEdit: React.FC = memo(() => {
     return (
         <Box className={classes.root} p={4}>
             <Formik
-                initialValues={{
-                    id, name, surname, birthday,
-                    phone: {
-                        code: phone?.code,
-                        number: phone?.number
-                    },
-                    address: {
-                        state: address?.state,
-                        city: address?.city
-                    }
-                }}
+                initialValues={profile}
                 validationSchema={validation}
                 onSubmit={submit}
             >
@@ -68,7 +57,7 @@ const ProfileEdit: React.FC = memo(() => {
                                 label="Avatar"
                             >
                                 {({ field, form, meta }: FieldProps) => <UploadFileField field={field} form={form} meta={meta}
-                                    multiple={false} accept="image/jpeg, image/png" maxSize={1048576} />}
+                                    prevImage={avatar} accept="image/jpeg, image/png" maxSize={1048576} />}
                             </Field>
                         </Row>
                         <Row>

@@ -11,6 +11,7 @@ export interface PostState {
     pagination: {
         per_page: number,
         total: number,
+        currentPage: number
     }
     fetching: boolean,
     error: boolean,

@@ -11,6 +11,7 @@ const SelectField: React.FC<TextFieldProps & SelectProps & OutlinedTextFieldProp
     return (
         <MuiSelect id="select" {...field} value={field.value || ''} error={error} onChange={field.onChange}
             onBlur={field.onBlur} {...props}>
+            <MenuItem>нет</MenuItem>
             <MenuItem value="+7">+7</MenuItem>
             <MenuItem value="+380">+380</MenuItem>
         </MuiSelect>
