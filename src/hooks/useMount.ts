@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from 'react';
 
 
-export const useMount = () => {
+export default () => {
     const mountState = useMemo(
         () => ({
             mounted: false,

@@ -4,7 +4,7 @@ import { RecoveryValues } from './types';
 import { Box, Button, Typography } from '@material-ui/core';
 import FormBox from '../components/FormBox';
 import { validation } from './validation';
-import { useMount } from '../../../hooks/useMount';
+import useMount from 'hooks/useMount';
 import Row from '../components/Row';
 import TextField from 'components/Fields/TextField';
 import { useDispatch } from 'react-redux';

@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Field, Formik, FieldProps } from 'formik';
 import { Box, Button } from '@material-ui/core';
 import { validation } from './validation';
-import { useMount } from 'hooks/useMount';
+import useMount from 'hooks/useMount';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
 import TextField from 'components/Fields/TextField';
@@ -15,6 +15,7 @@ import { Post } from '../../PostList/types';
 const FormPost: React.FC<PropsType> = memo(({ action, id, data, modalClose }) => {
     const mountState = useMount()
     const dispatch = useDispatch()
+    const { image, ...post } = data || {}
 
     const submit = async (values: Post, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         try {
@@ -22,14 +23,14 @@ const FormPost: React.FC<PropsType> = memo(({ action, id, data, modalClose }) =>
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
-                modalClose && modalClose(true)
+                modalClose && modalClose()
             }
         }
     }
 
     return <>
         <Formik
-            initialValues={{ ...data }}
+            initialValues={{ ...post }}
             validationSchema={validation}
             onSubmit={submit}
         >
@@ -51,7 +52,7 @@ const FormPost: React.FC<PropsType> = memo(({ action, id, data, modalClose }) =>
                             label="Image"
                         >
                             {({ field, form, meta }: FieldProps) => <UploadFileField field={field} form={form} meta={meta}
-                                accept="image/jpeg, image/png, image/svg" maxSize={1048576 * 2} />}
+                                prevImage={image} accept="image/jpeg, image/png, image/svg" maxSize={1048576 * 2} />}
                         </Field>
                     </Row>
                     <Row>

@@ -12,5 +12,5 @@ export const useStyles = makeStyles((theme: Theme) =>
         phone: {
             display: 'flex'
         },
-    }), { name: 'Profile' }
+    }), { name: 'ProfileEdit' }
 );

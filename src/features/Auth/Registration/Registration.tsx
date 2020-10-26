@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import FormBox from '../components/FormBox';
 import { validation } from './validation';
-import { useMount } from '../../../hooks/useMount';
+import useMount from 'hooks/useMount';
 import { registrate } from './actions';
 import Row from '../components/Row';
 import TextField from 'components/Fields/TextField';

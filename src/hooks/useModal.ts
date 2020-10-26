@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 
-export const useModal = () => {
+export default (): [boolean, () => void, () => void] => {
     const [opened, setOpened] = useState(false);
 
-    const Open = useCallback(() => {
+    const modalOpen = useCallback(() => {
         setOpened(true);
     }, [])
 
-    const Close = useCallback(() => {
+    const modalClose = useCallback(() => {
         setOpened(false);
     }, [])
-    return { opened, Open, Close }
+    return [opened, modalOpen, modalClose]
 }

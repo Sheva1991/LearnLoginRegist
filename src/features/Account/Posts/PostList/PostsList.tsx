@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, addPost } from './actions';
 import { selectData, selectFetching, selectTotalPages, selectCurrentPage, selectPerPage } from './selectors';
 import FormPost from '../components/FormPost';
-import { useModal } from '../../../../hooks/useModal';
+import useModal from 'hooks/useModal';
 
 
 const PostsList = memo(() => {
@@ -18,7 +18,7 @@ const PostsList = memo(() => {
     const currentPage = useSelector(selectCurrentPage)
     const fetching = useSelector(selectFetching)
     const [page, setPage] = useState(currentPage)
-    const { opened, Open, Close } = useModal()
+    const [opened, modalOpen, modalClose] = useModal()
     const classes = useStyles();
     const dispatch = useDispatch()
 
@@ -35,11 +35,11 @@ const PostsList = memo(() => {
             <Typography gutterBottom variant="h3" component="h3">
                 Статьи
             </Typography>
-            <Button color='primary' variant="contained" type="button" onClick={Open}>
+            <Button color='primary' variant="contained" type="button" onClick={modalOpen}>
                 Добавить пост
             </Button>
-            <SimpleModal opened={opened} modalClose={Close}>
-                <FormPost action={addPost} modalClose={Close} />
+            <SimpleModal opened={opened} modalClose={modalClose}>
+                <FormPost action={addPost} modalClose={modalClose} />
             </SimpleModal>
 
             {fetching ?

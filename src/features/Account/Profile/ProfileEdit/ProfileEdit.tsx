@@ -4,7 +4,7 @@ import { Button, Box } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { validation } from './validation';
 import TextField from 'components/Fields/TextField';
-import { useMount } from '../../../../hooks/useMount';
+import useMount from 'hooks/useMount';
 import { editProfile } from './actions';
 import FormBox from 'features/Auth/components/FormBox';
 import Row from 'features/Auth/components/Row';
@@ -12,7 +12,7 @@ import SelectField from 'components/Fields/SelectField';
 import { useStyles } from './styles';
 import { selectProfile } from 'features/Auth/selectors';
 import { useHistory } from 'react-router-dom';
-import { ROUTES } from '../../../../constants/routes';
+import { ROUTES } from 'constants/routes';
 import UploadFileField from 'components/Fields/UploadFileField';
 import { FullProfileFormValues, PropsType } from './types';
 
@@ -36,7 +36,7 @@ const ProfileEdit: React.FC<PropsType> = memo(({ modalClose }) => {
         } finally {
             if (mountState.mounted) {
                 setSubmitting(false)
-                modalClose && modalClose(true)
+                modalClose && modalClose()
             }
         }
     }

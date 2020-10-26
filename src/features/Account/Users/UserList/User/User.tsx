@@ -33,7 +33,7 @@ const User: React.FC<PropsType> = ({ profile, postsCount, id }) => {
 
             </CardContent>
             <CardActions className={classes.btn}>
-                <Link component={NavLink} to={`/users/user/${id}`}>
+                <Link component={NavLink} to={`/users/${id}`}>
                     <Button color='primary' variant="contained">more info</Button>
                 </Link>
             </CardActions>

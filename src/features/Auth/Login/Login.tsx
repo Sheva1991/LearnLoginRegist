@@ -7,7 +7,7 @@ import { ROUTES } from 'constants/routes';
 import { useDispatch } from 'react-redux';
 import FormBox from '../components/FormBox';
 import { validation } from './validation';
-import { useMount } from '../../../hooks/useMount';
+import useMount from 'hooks/useMount';
 import { login } from './actions';
 import Row from '../components/Row/Row';
 import TextField from 'components/Fields/TextField';

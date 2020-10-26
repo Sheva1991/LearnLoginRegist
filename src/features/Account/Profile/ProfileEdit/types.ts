@@ -14,5 +14,5 @@ export interface FullProfileFormValues {
     }
 }
 export interface PropsType {
-    modalClose?: (value: boolean) => void
+    modalClose?: () => void
 }

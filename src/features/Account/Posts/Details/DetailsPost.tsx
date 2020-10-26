@@ -7,7 +7,7 @@ import { selectLoading, selectPost } from './selectors';
 import { useStyles } from './styles';
 import SimpleModal from 'components/Modal/Modal';
 import FormPost from '../components/FormPost';
-import { useModal } from 'hooks/useModal';
+import useModal from 'hooks/useModal';
 
 
 const DetailsPost = () => {
@@ -15,7 +15,7 @@ const DetailsPost = () => {
     const dispatch = useDispatch()
     const post = useSelector(selectPost)
     const loading = useSelector(selectLoading)
-    const { opened, Open, Close } = useModal()
+    const [opened, modalOpen, modalClose] = useModal()
     const params = useParams<{ id: string }>();
     const id = +params.id
 
@@ -48,11 +48,11 @@ const DetailsPost = () => {
                                     Содержание: {post?.text}
                                 </Typography>
                             </Box>
-                            <Button color='primary' variant="contained" type="button" onClick={Open}>
+                            <Button color='primary' variant="contained" type="button" onClick={modalOpen}>
                                 Edit post
                             </Button>
-                            <SimpleModal opened={opened} modalClose={Close}>
-                                <FormPost action={editPost} id={id} data={post} modalClose={Close} />
+                            <SimpleModal opened={opened} modalClose={modalClose}>
+                                <FormPost action={editPost} id={id} data={post} modalClose={modalClose} />
                             </SimpleModal>
                         </CardContent>
                     </Card>
